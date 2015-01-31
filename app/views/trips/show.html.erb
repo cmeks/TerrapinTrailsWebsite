@@ -41,7 +41,7 @@
                 <% end %>
             <% end %>
         </div>
-        <% if current_user.id == @trip.user.id %>
+        <% if logged_in? && current_user.id == @trip.user.id %>
             <div class='push-down-small'>
                 <%= button_to "Edit this Trip", edit_trip_path(@trip), :class => "btn btn-primary btn-md", :method => :get  %>
             </div>

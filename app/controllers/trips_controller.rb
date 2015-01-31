@@ -8,7 +8,9 @@ class TripsController < ApplicationController
 		@users = @trip.users
 		@carpools = @trip.carpools
 		@on_trip = @trip.users.include?(current_user)
-		@car = current_user.carpools.find_by(trip_id: @trip.id)
+		if logged_in?
+			@car = current_user.carpools.find_by(trip_id: @trip.id)
+		end
 		if @on_trip == true
 			@user_trip = @trip.users_trips.find_by(user_id: current_user.id)
 		end
