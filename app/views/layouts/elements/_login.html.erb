@@ -1,0 +1,32 @@
+<% if logged_in? %>
+    <div class="well">
+        <!--<?php echo $this->Html->image('User/' . AuthComponent::user('image'),
+                array('class' => 'img-thumbnail center-block')); ?>-->
+
+        <h4 class="text-center">Hi, <%= @user.name %>!</h4>
+        <p class="text-center">Welcome back.</p>
+        <p class="text-center">
+            <%= link_to "Profile", @user, class: 'small-padding btn btn-md btn-primary' %>
+            <%= link_to "Logout", logout_path, method: "delete", class: 'small-padding btn btn-md btn-success' %> 
+        </p>
+    </div>
+<% else %>
+    <div class="well">
+        <%= form_for(:session, url: login_path) do |f| %>
+            <%= f.email_field :email, :placeholder => "email", class: 'form-control wide' %>
+
+            <%= f.password_field :password, :placeholder => "password", class: 'form-control wide' %>
+
+            <%= f.label :remember_me, class: "checkbox inline wide" do %>
+                <%= f.check_box :remember_me %>
+                <span>Keep me loggin in</span>
+            <% end %>
+
+            <%= f.submit "Log in", class: "btn btn-primary wide" %>
+
+            
+        <% end %>
+
+        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+<% end %>

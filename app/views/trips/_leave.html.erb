@@ -1,0 +1,3 @@
+<%= form_for(current_user.users_trips.find_by(trip_id: @trip.id), html: { method: :delete }) do |f| %>
+  	<%= f.submit "Leave this Trip", class: "btn" %>
+<% end %>

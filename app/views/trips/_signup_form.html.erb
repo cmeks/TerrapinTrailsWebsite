@@ -1,0 +1,7 @@
+<div id="signup_form">
+  <% if @trip.users.include?(current_user) %>
+    <%= render 'leave' %>
+  <% else %>
+    <%= render 'signup' %>
+  <% end %>
+</div>

@@ -1,0 +1,159 @@
+<% 
+    if @trip.spots + 1 - @users.count > 0 
+        spots_left = @trip.spots - @users.count
+        is_waitlist = false
+    else 
+        spots_left = 0
+        waitlist = @users.count - @trip.spots
+        is_waitlist = true
+    end
+%>
+<% provide(:title, @trip.name) %>
+<div class='row header'>
+	<div class='col-md-8'>
+		<h1><b><%= @trip.name %></b></h1> 
+        <h4> <%= @trip.location %></h4> 
+		<div class="trip-dates"><%= @trip.start_date.strftime("%b %d %I:%M %p") %> - 
+			<%= @trip.end_date.strftime("%b %d %I:%M %p") %>
+        </div>
+        <h3> 
+            Total spots: <%= @trip.spots %>, 
+            Spots left: <%= spots_left %> 
+            <% if is_waitlist == true %>
+                , Waitlist: <%= waitlist %>
+            <% end %>
+        </h3>
+        <h3> Experience Level: <%= @trip.experience_level %> </h3>
+	</div>
+	<div class='col-md-3 pull-right push-down'>
+		<%= render 'signup_form' if logged_in? %>
+        <div class='push-down-small'>
+            <% if @on_trip == true && !(@user_trip.on_waitlist == 1)  %>
+                <% if @car.nil? %> 
+                    <%= form_tag(car_path, method: "get") do %>
+                        <%= hidden_field_tag(:trip_id, @trip.id) %>
+                        <%= submit_tag 'Sign a Car up!', class: 'small-padding btn btn-md btn-primary' %>
+                    <% end %>
+                <% else %>
+                    <%= form_for(@car, html: { method: :delete }) do |f| %>
+                        <%= f.submit "Remove your Car", class: "btn" %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
+        <% if current_user.id == @trip.user.id %>
+            <div class='push-down-small'>
+                <%= button_to "Edit this Trip", edit_trip_path(@trip), :class => "btn btn-primary btn-md", :method => :get  %>
+            </div>
+        <% end %>
+        <div>
+            <% if @on_trip == true %>
+                <% if  @user_trip.on_waitlist == 1 %>
+                    <h3> You are on the waitlist </h3>
+                <% end %>
+                <% if @user_trip.on_waitlist == 0 %>
+                    <h3> You are on the Trip! </h3>
+                <% end %>
+            <% end %>
+        </div>
+	</div>
+</div>
+
+<ul class="nav nav-tabs nav-justified">
+  	<li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+    <% if @on_trip == true %>
+        <li><a href="#carpools" data-toggle="tab">Carpools</a></li>
+        <li><a href="#going" data-toggle="tab">Who is going</a></li>
+    <% end %>
+</ul>
+
+<div class="tab-content">
+        <div class="tab-pane fade in active" id="details">
+            <div class="row">
+            	<div class="col-md-12">
+            		<%= @trip.description.html_safe %>
+            	</div>
+            </div>
+            <div class="push-down">
+                <h4> Pretrip at <%= @trip.pretrip_location %> 
+                    on <%= @trip.pretrip_datetime.strftime("%b %d %I:%M %p") %> 
+                </h4>
+                <h4> Cost: $<%= @trip.cost %> </h4>
+            </div>
+        </div>
+        <% if @on_trip == true %>
+            <div class="tab-pane fade" id="carpools">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Car</th>
+                            <th>Passengers</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <% @carpools.each do |carr| %>
+                            <tr>
+                                <td>
+                                    <table border="0">
+                                        <tr><th> <%= carr.color %> <%= carr.make %> <%= carr.model %> </th></tr>
+                                        <tr><td> Driver: <%= carr.user.name %> </td></tr>
+                                        <tr><td> Leaving: <%= carr.leave_time.strftime("%b %d %I:%M %p") %></td></tr>
+                                        <tr><td> Size: <%= carr.seats - carr.users_trips.count %> </td></tr>
+                                        <tr><td> <br/> </td></tr>
+                                        <tr>
+                                            <td> 
+                                                <div>
+                                                    <% if @car.nil? %>
+                                                        <% if !(carr.users_trips.include?(@user_trip)) && @user_trip.users_cars.count == 0  && carr.seats - carr.users_trips.count > 0 %>
+                                                            <%= form_for(@user_trip.users_cars.build) do |f| %>
+                                                                <div><%= hidden_field_tag :car_id, carr.id %></div>
+                                                                <div><%= hidden_field_tag :users_trip_id, @user_trip.id %></div>
+                                                                <%= f.submit "Sign up for this Car!", class: "btn btn-default" %>
+                                                            <% end %>
+                                                        <% elsif !(carr.users_trips.include?(@user_trip)) && @user_trip.users_cars.count == 1 && carr.seats - carr.users_trips.count > 0 %>
+                                                            <%= form_tag(car_join_path, method: "get") do %>
+                                                                <div><%= hidden_field_tag :car_id, carr.id %></div>
+                                                                <div><%= hidden_field_tag :users_trip_id, @user_trip.id %></div>
+                                                                <div><%= hidden_field_tag :users_cars_id, @user_trip.users_cars.first.id %> </div>
+                                                                <%= submit_tag "Sign up for this Car!", class: "btn btn-default" %>
+                                                            <% end %>
+                                                        <% elsif carr.seats - carr.users_trips.count <= 0 && !(carr.users_trips.include?(@user_trip)) %>
+                                                            <h4> This Car is full!</h4>
+                                                        <% else %>
+                                                            <%= form_for(carr.users_cars.find_by(users_trip_id: @user_trip.id), html: { method: :delete }) do |f| %>
+                                                                <%= f.submit "Leave this Car!", class: "btn btn-default" %>
+                                                            <% end %>
+                                                        <% end %>
+                                                    <% else %>
+                                                        <% if carr.id == @car.id %>
+                                                            <%= form_tag(edit_car_path, method: "get") do %>
+                                                                <%= hidden_field_tag(:trip_id, @trip.id) %>
+                                                                <%= hidden_field_tag(:car_id, @car.id) %>
+                                                                <%= submit_tag 'Edit your Car!', class: 'btn btn-default' %>
+                                                            <% end %>
+                                                        <% end %>
+                                                    <% end %>   
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table class="table table-hover table-condensed">
+                                        <% carr.users_trips.each do |f| %>
+                                            <tr><td> <%= f.user.name %> </tr> </td>
+                                        <% end %>
+                                    </table>
+                                </td>
+                            </tr> 
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="going">
+                <% @users.each do |user| %>
+                    <h3 class="center"><%= link_to user.name, user %></h3>
+                <% end %>
+            </div>
+        <% end %>
+</div>

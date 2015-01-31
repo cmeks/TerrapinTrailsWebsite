@@ -1,0 +1,14 @@
+<div>
+  <% if @trip.users.include?(current_user) && !(@carpools_users.include?(current_user)) %>
+    <%= form_for(@user_trip.users_cars.build, remote: true) do |f| %>
+  		<div><%= hidden_field_tag :car_id, car.id %></div>
+  		<div><%= hidden_field_tag :users_trip_id, @user_trip.id %></div>
+  		<%= f.submit "Sign up for this Car!", class: "btn btn-default" %>
+	<% end %>
+  <% else %>
+    <%= form_for(car.users_car.build, remote: true) do |f| %>
+  		<div><%= hidden_field_tag :trip_id, @trip.id %></div>
+  		<%= f.submit "Sign up for this Car!", class: "btn btn-default" %>
+	<% end %>
+  <% end %>
+</div>

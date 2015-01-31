@@ -1,0 +1,2 @@
+$("#signup_form").html("<%= escape_javascript(render('trips/signup')) %>")
+$("#going").html('<h1><%= @trip.users_trips.count %></h1>')

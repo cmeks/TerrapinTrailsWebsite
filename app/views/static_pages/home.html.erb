@@ -1,0 +1,80 @@
+<script>
+	$(document).ready(function(){
+	     $(".start-slide").click(function(){
+	        $("#myCarousel").carousel('cycle');
+	    });
+	});
+</script>
+
+<h1 class="red"> THIS IS A BETA TEST WEBSITE, NOTHING IS SECURE </h1>
+<div class="row">
+    <div class="hidden-xs hidden-sm col-md-12 col-lg-12">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 10px;">
+        	<ol class="carousel-indicators">
+        		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        		<li data-target="#myCarousel" data-slide-to="1"></li>
+        		<li data-target="#myCarousel" data-slide-to="2"></li>
+        		<li data-target="#myCarousel" data-slide-to="3"></li>
+        		<li data-target="#myCarousel" data-slide-to="4"></li>
+        		<li data-target="#myCarousel" data-slide-to="5"></li>
+        		<li data-target="#myCarousel" data-slide-to="6"></li>
+        		<li data-target="#myCarousel" data-slide-to="7"></li>
+        		<li data-target="#myCarousel" data-slide-to="8"></li>
+        		<li data-target="#myCarousel" data-slide-to="9"></li>
+        		<li data-target="#myCarousel" data-slide-to="10"></li>
+    		</ol>
+    		<div class="carousel-inner">
+		        <div class="item active">
+		            <%= image_tag("Banner/carousel1.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel2.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel3.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel4.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel5.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel6.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel7.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel8.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel9.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel10.jpg", alt: "Rails") %>
+		        </div>
+		        <div class="item">
+		            <%= image_tag("Banner/carousel11.jpg", alt: "Rails") %>
+		        </div>
+		    </div>
+    <!-- Carousel nav -->
+		    <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+		        <span class="glyphicon glyphicon-chevron-left"></span>
+		    </a>
+		    <a class="carousel-control right" href="#myCarousel" data-slide="next">
+		        <span class="glyphicon glyphicon-chevron-right"></span>
+		    </a>
+		</div>
+	</div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" id="message">
+        <h3>A Message from Our President</h3>
+        <%= render 'layouts/elements/message' %>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <h3>Upcoming Trips</h3>
+        <p class="text-muted">This feature will be implemented soon. Please email Mikey Chapman at cmekss@gmailcom for further details</p>
+    </div>
+</div>

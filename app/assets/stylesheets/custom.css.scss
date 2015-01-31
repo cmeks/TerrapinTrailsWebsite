@@ -1,0 +1,416 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+//all the styles for the main pages, jamisons CSS
+#header {
+    padding-bottom: 5px;
+}
+
+#header {
+	background-image: image-url("background.jpg");
+    background-size: cover;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    color: #fff;
+    height: 150px;
+    text-shadow: 5px 5px 15px #000;
+}
+
+#header h1, #header h2 {
+    font-family: Georgia, serif;
+}
+
+#header h2 {
+    color: #ccc;
+}
+
+#header #logo {
+    width: 50%;
+}
+
+#header #logo img {
+    margin: 10px 10px 0 0;
+}
+
+#header #logo h1 {
+    font-size: 48px;
+}
+
+#header #logo h2 {
+    margin-top: 0;
+}
+
+#header #hud {
+    width: 50%;
+}
+
+#header #hud #weather .media {
+    color: #ccc;
+    display: inline-block;
+    margin: 30px 10px 0 0;
+}
+
+#header #weather .media img {
+    height: 100px;
+    width: 100px;
+}
+
+#header #hud #weather .media .media-body {
+    height: 100%;
+    margin-top: 20px;
+}
+
+#header #hud #meeting {
+    padding-right: 20px;
+    text-align: right;
+}
+
+#navbar .navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+#body #headline {
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-bottom-right-radius: 4px;
+    margin: 0 -25px 20px -25px;
+    padding: 10px 0 20px 25px;
+}
+
+#body #headline h2 {
+    font-size: 35px;
+}
+
+#body #headline .lead {
+    margin-bottom: 0;
+}
+
+#body #content .nav-tabs {
+    font-weight: bold;
+}
+
+#body #leftbar, #body #rightbar {
+    padding-top: 20px;
+}
+
+#body #leftbar #about {
+    font-size: 16px;
+    text-align: justify;
+}
+
+#body #leftbar #about .buttons {
+    text-align: center;
+}
+
+#body #leftbar #about .buttons a {
+    margin-right: 5px;
+}
+
+#body #leftbar #officers .media {
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+#body #leftbar #officers .media img {
+    height: 70px;
+    width: 70px;
+}
+
+#body #content .tab-pane {
+    padding: 15px 0 0 15px;
+}
+
+#body #content .tab-content {
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 0 20px 0 5px;
+}
+
+#body #content .glyphicon-question-sign {
+    color: #888;
+    cursor: pointer;
+}
+
+#body #content .tab-content h3 {
+    margin-top: 5px;
+}
+
+#body #content .width-5 {
+    width: 5%;
+}
+
+#body #content .width-10 {
+    width: 10%;
+}
+
+#body #content .width-15 {
+    width: 15%;
+}
+
+#body #content .width-20 {
+    width: 20%;
+}
+
+#body #content .width-25 {
+    width: 25%;
+}
+
+#body #content .width-30 {
+    width: 30%;
+}
+
+#body #content .width-35 {
+    width: 35%;
+}
+
+#body #content .width-40 {
+    width: 40%;
+}
+
+#body #content .width-45 {
+    width: 45%;
+}
+
+#body #content .width-50 {
+    width: 50%;
+}
+
+#body #content .width-55 {
+    width: 55%;
+}
+
+#body #content .width-60 {
+    width: 60%;
+}
+
+#body #content .width-65 {
+    width: 65%;
+}
+
+#body #content .width-70 {
+    width: 70%;
+}
+
+#body #content .width-75 {
+    width: 75%;
+}
+
+#body #content .width-80 {
+    width: 80%;
+}
+
+#body #content .width-85 {
+    width: 85%;
+}
+
+#body #content .width-90 {
+    width: 90%;
+}
+
+#body #content .width-95 {
+    width: 95%;
+}
+
+#body #content .width-100 {
+    width: 100%;
+}
+
+#body #content .table-hover {
+    cursor: pointer;
+}
+
+#body #content .lightbox:hover {
+    cursor: pointer;
+}
+
+#body #content .btn-mega {
+    padding: 10px;
+    font-size: 30px;
+}
+
+#body #content .btn-mega small {
+    display: block;
+    font-size: 15px;
+}
+
+#body #content form .form-group .help {
+    color: #666;
+}
+
+#body #content form .form-group .help:hover {
+    cursor: pointer;
+}
+
+#body #content .btn-tag {
+    background: #eee;
+    margin: 0 10px 10px 0;
+}
+
+#body #content .btn-tag .x {
+    font-size: 18px;
+    line-height: 1em;
+    vertical-align: bottom;
+}
+
+#body #rightbar .well {
+    padding: 15px;
+}
+
+#body #rightbar .well form {
+    margin: 5px;
+    text-align: center;
+}
+
+#body #rightbar #newsfeed .media {
+    padding-left: 10px ;
+}
+
+#body #rightbar #mission p {
+    color: #555;
+    font-size: 16px;
+    font-style: italic;
+    font-family: Georgia, serif;
+    padding-left: 10px;
+}
+
+#footer {
+    color: #888;
+    font-size: 10pt;
+    margin-top: 30px;
+}
+
+#footer .navbar {
+    border-radius: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 0;
+}
+
+#footer #quote blockquote {
+    border-left: none;
+    color: #555;
+}
+
+#footer #quote blockquote footer {
+    color: #555;
+    margin-top: 5px;
+}
+
+#footer #sitemap ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#footer #credits ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#footer #tech {
+    margin-top: 15px;
+}
+
+/*********
+ * forms * 
+ *********/
+
+input, textarea, select, .uneditable-input {
+    border: 1px solid #bbb;
+    margin-bottom: 15px;
+    -moz-box-sizing:   border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+}
+
+input {
+    height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+/***************** 
+ * miscellaneous *
+ *****************/
+
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+}
+
+.wide {
+    width: 100%;
+}
+
+.right {
+    float: right;
+}
+
+.push-down {
+    padding-top: 20px;
+}
+
+.push-down-small {
+    padding-top: 10px;
+}
+
+.trip-dates {
+    font-size: 23px;
+}
+
+#datetime {
+    width: auto;
+}
+
+.description {
+    height: 250px !important;
+}
+
+.small_description {
+    height: 120px !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.header {
+    padding-bottom: 20px;
+}
+
+.red {
+    color: red;
+}

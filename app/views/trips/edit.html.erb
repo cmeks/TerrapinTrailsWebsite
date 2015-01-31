@@ -1,0 +1,62 @@
+<% provide(:title, "Edit Trip") %>
+<h1>Update your Trip!</h1>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for(@trip) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <div>
+        <%= f.text_field :name, class: 'form-control wide' %>
+      </div>
+
+      <%= f.label :start_date %>
+      <div>
+        <%= f.datetime_select :start_date, ampm: true, class: 'form-control' %>
+      </div>
+
+      <%= f.label :end_date %>
+      <div>
+        <%= f.datetime_select :end_date, ampm: true, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :cost, "Cost: $" %>
+        <%= f.number_field :cost %>
+      </div>
+      <div> 
+        <%= f.label :pretrip_datetime %>
+        <div>
+          <%= f.datetime_select :pretrip_datetime, ampm: true, class: 'form-control' %>
+        </div>
+      </div>
+
+      <%= f.label :pretrip_location %>
+      <div>
+        <%= f.text_field :pretrip_location, class: 'form-control wide' %>
+      </div>
+
+      <%= f.label :spots %>
+        <div>
+          <%= f.number_field :spots %>
+        </div>
+
+      <%= f.label :location %>
+      <%= f.text_field :location, class: 'form-control wide' %>
+          
+      <%= f.label :experience_level, "Experience Level: " %>
+      <%= f.select(:experience_level, [['Beginner'], ['Intermediate'], ['Advanced'], ['All Levels']]) %>
+
+      <div>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+      </div>
+
+      <%= f.label :description %>
+      <div class='field'>
+        <%= f.bootsy_area :description, editor_options: {image: false}, class: 'description form-control' %>
+      </div>
+
+      <%= f.submit "Update my Trip", class: "btn btn-primary wide" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<%= form_for(current_user.users_trips.build) do |f| %>
+  	<div><%= hidden_field_tag :trip_id, @trip.id %></div>
+  	<%= f.submit "Sign up for this Trip!", class: "btn btn-primary" %>
+<% end %>

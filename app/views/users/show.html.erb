@@ -1,0 +1,104 @@
+<div class="row header">
+	<div class="col-md-8">
+		<h1 style="text-shadow: 1px 1px 1px #ccc;"> <%= @user.name %> </h1>
+	</div>
+	<div class="col-md-4 push-down">
+		<button class="btn btn-primary pull-right">Edit Profile</button>
+	</div>
+</div>
+
+<ul class="nav nav-tabs pull-left">
+  	<li class="active"><a href="#biography" data-toggle="tab">Biography</a></li>
+  	<li><a href="#trips" data-toggle="tab">Trips</a></li>
+  	<li><a href="#cars" data-toggle="tab">Cars</a></li>
+</ul>
+
+<div class="tab-content">
+        <div class="tab-pane fade in active" id="biography">
+        	<div class="row">
+        	</div>
+					<div class="row push-down">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<p></p>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="row">
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									Position
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									Member
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									Dues Paid <i class="fa fa-times"></i>
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									N/A
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									Waiver Signed <i class="fa fa-check"></i>
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									07/18/1993
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									Join Date
+								</div>
+								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+									07/18/1993
+								</div>
+							</div>
+						</div>
+					</div>
+        </div>
+        <div class="tab-pane fade" id="trips">
+            <table class="table table-hover">
+            	<thead>
+            			<tr>
+				            <th>Name</th>
+				            <th>Start Date</th>
+				            <th>End Date</th>
+			                <th>Trip Size</th>
+				        </tr>
+				</thead>
+	            <tbody>
+	   				 <% @user.trips.each do |trip| %>
+	   				 	<tr>
+		    				<th> <%= link_to trip.name, trip %> </th>
+		    				<th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+		    				<th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+		    				<th> 5 </th>
+	    				</tr>
+	  				<% end %>
+	  			</tbody>
+  			</table>
+        </div>
+        <div class="tab-pane fade" id="cars">
+            <table class="table table-hover">
+            	<thead>
+            			<tr>
+				            <th>Name</th>
+				            <th>Color</th>
+				            <th>Make and Model</th>
+			                <th>Year</th>
+			                <th>Seats</th>
+				        </tr>
+				</thead>
+	            <tbody>
+	   				 <tr>
+				        <td>The Bus</td>
+				        <td>Yellow</td>
+				        <td>3000</td>
+				        <td>Civic</td>
+				        <td>30</td>
+				    </tr>
+	  			</tbody>
+  			</table>
+        </div>
+</div>

@@ -1,0 +1,54 @@
+<% provide(:title, 'Create a Car') %>
+<h1 class="center header">Create a Car!</h1>
+
+<div class="row">
+  	<div class="col-md-8 col-md-offset-2">
+    	<%= form_for(@carpool) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+
+      		<%= f.label :nickname %>
+      		<%= f.text_field :nickname, class: 'form-control wide' %>
+
+          <%= f.label :make %>
+          <%= f.text_field :make, class: 'form-control wide' %>
+
+          <%= f.label :model %>
+          <%= f.text_field :model, class: 'form-control wide' %>
+
+          <%= f.label :year %>
+          <div>
+            <%= f.number_field :year %>
+          </div>
+
+          <%= f.label :color %>
+          <div>
+            <%= f.text_field :color %>
+          </div>
+          
+          <%= f.label :leave_time %>
+          <div>
+            <%= f.datetime_select :leave_time, ampm: true, class: 'form-control' %>
+          </div>
+
+          <%= f.label :seats %>
+          <div>
+            <%= f.number_field :seats %>
+          </div>
+
+          <%= f.label :message %>
+          <div class='field'>
+            <%= f.text_area :message, class: 'form-control small_description'%>
+          </div>
+
+          <div>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+          </div>
+
+          <div>
+            <%= f.hidden_field :trip_id, :value => current_trip %>
+          </div>
+
+      		<%= f.submit "Create my Car for this Trip", class: "btn btn-primary wide" %>
+    	<% end %>
+  	</div>
+</div>

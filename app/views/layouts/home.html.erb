@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ttcwebsite2</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <% @user ||= current_user %>
+	<div id="page">
+            <div id="header">
+            	<%= render 'layouts/elements/header' %>
+            </div>
+            <div id="navbar">
+            	<%= render 'layouts/elements/navbar' %>
+            </div>
+            <div id="body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                            <div class="sidebar" id="leftbar">
+                            	<%= render 'layouts/elements/leftbar' %>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8" id="content">
+                        	<%= yield %>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                            <div class="sidebar" id="rightbar">
+                            	<%= render 'layouts/elements/rightbar' %>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div id="footer">
+            	<%= render "layouts/elements/footer" %>
+            </div>
+            <%= debug(params) if Rails.env.development? %>
+        </div>
+</body>
+</html>
