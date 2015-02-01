@@ -48,7 +48,7 @@
             <%= f.hidden_field :trip_id, :value => current_trip %>
           </div>
 
-      		<%= f.submit "Create my Car for this Trip", class: "btn btn-primary wide" %>
+      		<%= f.submit "Create my Car for this Trip", class: "btn btn-primary wide", data: { disable_with: "Please wait..." } %>
     	<% end %>
   	</div>
 </div>
