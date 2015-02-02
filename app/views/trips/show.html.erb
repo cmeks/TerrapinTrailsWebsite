@@ -26,7 +26,9 @@
         <h3> Experience Level: <%= @trip.experience_level %> </h3>
 	</div>
 	<div class='col-md-3 pull-right push-down'>
-		<%= render 'signup_form' if logged_in? %>
+        <% if @trip.start_date > Time.now %>
+		  <%= render 'signup_form' if logged_in? %>
+        <% end %>
         <div class='push-down-small'>
             <% if @on_trip == true && !(@user_trip.on_waitlist == 1)  %>
                 <% if @car.nil? && @user_trip.users_cars.count == 0 %> 
