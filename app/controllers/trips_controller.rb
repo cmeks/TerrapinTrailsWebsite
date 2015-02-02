@@ -1,6 +1,21 @@
 class TripsController < ApplicationController
 	def index
 		@trips = Trip.all
+		@current = Array.new
+		@outgoing = Array.new
+		@past = Array.new
+		@leading = Array.new
+		@trips.each do |f|
+			if logged_in? && f.user == current_user && f.end_date > Time.now
+				@leading.push(f)
+			elsif f.start_date < Time.now && f.end_date > Time.now
+				@outgoing.push(f)
+			elsif f.start_date > Time.now && f.end_date > Time.now
+				@current.push(f)
+			else 
+				@past.push(f)
+			end
+		end
 	end
 
 	def show
@@ -47,6 +62,12 @@ class TripsController < ApplicationController
 	def car
 		update_trip_id(params[:trip_id])
 		redirect_to newCar_path
+	end
+
+	def destroy
+		Trip.find(params[:id]).destroy
+		flash[:success] = "Your Trip was successfully deleted"
+    	redirect_to trips_url
 	end
 
 	private

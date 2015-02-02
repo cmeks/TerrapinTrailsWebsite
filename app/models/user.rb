@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 	#associations
 	has_many :users_trips, dependent: :destroy
   has_many :carpools, dependent: :destroy
-	has_many :trips, :through => :users_trips, dependent: :destroy
+	has_many :trips, :through => :users_trips
 
 	#creates the remember token for a user
 	attr_accessor :remember_token

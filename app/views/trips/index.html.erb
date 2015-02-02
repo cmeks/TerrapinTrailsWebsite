@@ -10,7 +10,9 @@
   	<li class="active"><a href="#current" data-toggle="tab">Current Trips</a></li>
   	<li><a href="#outgoing" data-toggle="tab">Outgoing Trips</a></li>
   	<li><a href="#past" data-toggle="tab">Past Trips</a></li>
-  	<li><a href="#tab_d" data-toggle="tab">Reserved</a></li>
+    <% if logged_in? %>
+  	 <li><a href="#leading" data-toggle="tab">Trips your leading</a></li>
+    <% end %>
 </ul>
 <div class="tab-content">
         <div class="tab-pane fade in active" id="current">
@@ -24,7 +26,7 @@
     				</tr>
    				 </thead>
    				 <tbody>
-   				 	<% @trips.each do |trip| %>
+   				 	<% @current.each do |trip| %>
    				 		<tr>
 	    					<th> <%= link_to trip.name, trip %> </th>
 	    					<th> <%= trip.user.name %> </th>
@@ -45,6 +47,16 @@
         				<th>End Date</th>
     				</tr>
    				 </thead>
+           <tbody>
+                  <% @outgoing.each do |trip| %>
+                    <tr>
+                      <th> <%= link_to trip.name, trip %> </th>
+                      <th> <%= trip.user.name %> </th>
+                      <th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                      <th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                    </tr>
+                  <% end %>
+              </tbody>
             </table>
         </div>
         <div class="tab-pane fade" id="past">
@@ -57,18 +69,40 @@
         				<th>End Date</th>
     				</tr>
    				 </thead>
+           <tbody>
+                  <% @past.each do |trip| %>
+                    <tr>
+                      <th> <%= link_to trip.name, trip %> </th>
+                      <th> <%= trip.user.name %> </th>
+                      <th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                      <th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                    </tr>
+                  <% end %>
+              </tbody>
             </table>
         </div>
-        <div class="tab-pane fade" id="tab_d">
-            <table class="table table-hover">
-            	<thead>
-    				<tr>
-        				<th>Trip Name</th>
-        				<th>Trip Leader</th>
-        				<th>Start Date</th>
-        				<th>End Date</th>
-    				</tr>
-   				 </thead>
+        <% if logged_in? %>
+          <div class="tab-pane fade" id="leading">
+              <table class="table table-hover">
+                <thead>
+        				  <tr>
+            				<th>Trip Name</th>
+            				<th>Trip Leader</th>
+            				<th>Start Date</th>
+            				<th>End Date</th>
+        				  </tr>
+       				 </thead>
+               <tbody>
+                  <% @leading.each do |trip| %>
+                    <tr>
+                      <th> <%= link_to trip.name, trip %> </th>
+                      <th> <%= trip.user.name %> </th>
+                      <th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                      <th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                    </tr>
+                  <% end %>
+              </tbody>
             </table>
-        </div>
+          </div>
+        <% end %>
 </div><!-- tab content -->

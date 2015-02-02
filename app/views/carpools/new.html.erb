@@ -47,8 +47,11 @@
           <div>
             <%= f.hidden_field :trip_id, :value => current_trip %>
           </div>
-
-      		<%= f.submit "Create my Car for this Trip", class: "btn btn-primary wide", data: { disable_with: "Please wait..." } %>
+          
+          <div class="buttons">
+      		  <%= f.submit "Create my Car for this Trip", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
+            <%= link_to "Cancel", '/trips/' + current_trip, {:class=>"btn btn-primary"} %>
+          </div>
     	<% end %>
   	</div>
 </div>

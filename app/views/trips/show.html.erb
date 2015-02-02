@@ -29,14 +29,14 @@
 		<%= render 'signup_form' if logged_in? %>
         <div class='push-down-small'>
             <% if @on_trip == true && !(@user_trip.on_waitlist == 1)  %>
-                <% if @car.nil? %> 
+                <% if @car.nil? && @user_trip.users_cars.count == 0 %> 
                     <%= form_tag(car_path, method: "get") do %>
                         <%= hidden_field_tag(:trip_id, @trip.id) %>
                         <%= submit_tag 'Sign a Car up!', class: 'small-padding btn btn-md btn-primary' %>
                     <% end %>
                 <% else %>
                     <%= form_for(@car, html: { method: :delete }) do |f| %>
-                        <%= f.submit "Remove your Car", class: "btn" %>
+                        <%= f.submit "Remove your Car", class: "btn", data: { disable_with: "Please wait..." } %>
                     <% end %>
                 <% end %>
             <% end %>
@@ -75,9 +75,13 @@
             	</div>
             </div>
             <div class="push-down">
-                <h4> Pretrip at <%= @trip.pretrip_location %> 
-                    on <%= @trip.pretrip_datetime.strftime("%b %d %I:%M %p") %> 
-                </h4>
+                <% if !(@trip.pretrip_location == "") %>
+                    <h4> Pretrip at <%= @trip.pretrip_location %> 
+                        on <%= @trip.pretrip_datetime.strftime("%b %d %I:%M %p") %> 
+                    </h4>
+                <% else %>
+                    <h4> There is no pretrip for this Trip </h4>
+                <% end %>
                 <h4> Cost: $<%= @trip.cost %> </h4>
             </div>
         </div>
@@ -108,20 +112,20 @@
                                                             <%= form_for(@user_trip.users_cars.build) do |f| %>
                                                                 <div><%= hidden_field_tag :car_id, carr.id %></div>
                                                                 <div><%= hidden_field_tag :users_trip_id, @user_trip.id %></div>
-                                                                <%= f.submit "Sign up for this Car!", class: "btn btn-default" %>
+                                                                <%= f.submit "Sign up for this Car!", class: "btn btn-default", data: { disable_with: "Please wait..." } %>
                                                             <% end %>
                                                         <% elsif !(carr.users_trips.include?(@user_trip)) && @user_trip.users_cars.count == 1 && carr.seats - carr.users_trips.count > 0 %>
                                                             <%= form_tag(car_join_path, method: "get") do %>
                                                                 <div><%= hidden_field_tag :car_id, carr.id %></div>
                                                                 <div><%= hidden_field_tag :users_trip_id, @user_trip.id %></div>
                                                                 <div><%= hidden_field_tag :users_cars_id, @user_trip.users_cars.first.id %> </div>
-                                                                <%= submit_tag "Sign up for this Car!", class: "btn btn-default" %>
+                                                                <%= submit_tag "Sign up for this Car!", class: "btn btn-default", data: { disable_with: "Please wait..." } %>
                                                             <% end %>
                                                         <% elsif carr.seats - carr.users_trips.count <= 0 && !(carr.users_trips.include?(@user_trip)) %>
                                                             <h4> This Car is full!</h4>
                                                         <% else %>
                                                             <%= form_for(carr.users_cars.find_by(users_trip_id: @user_trip.id), html: { method: :delete }) do |f| %>
-                                                                <%= f.submit "Leave this Car!", class: "btn btn-default" %>
+                                                                <%= f.submit "Leave this Car!", class: "btn btn-default", data: { disable_with: "Please wait..." } %>
                                                             <% end %>
                                                         <% end %>
                                                     <% else %>

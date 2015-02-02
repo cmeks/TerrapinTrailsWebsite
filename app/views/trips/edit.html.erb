@@ -55,8 +55,12 @@
       <div class='field'>
         <%= f.bootsy_area :description, editor_options: {image: false}, class: 'description form-control' %>
       </div>
-
-      <%= f.submit "Update my Trip", class: "btn btn-primary wide" %>
+      
+      <div class="buttons">
+        <%= f.submit "Update my Trip", class: "btn btn-primary" %>
+        <%= link_to "Cancel", @trip, {:class=>"btn btn-primary"} %>
+        <%= button_to "Delete this Trip", @trip, :method => :delete, class: "btn btn-primary" %>
+      </div>
     <% end %>
   </div>
 </div>

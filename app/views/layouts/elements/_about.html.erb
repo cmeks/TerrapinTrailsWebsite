@@ -9,6 +9,12 @@
 </p>
 
 <div class="buttons">
-	<%= link_to "Join Us", '#', class: "btn btn-primary" %>
-	<%= link_to "Learn More", '#', class: "btn btn-success" %>
+	<% if !logged_in? %>
+		<%= link_to "Join Us", signup_path, class: "btn btn-primary" %>
+	<% end %>
+	<% if logged_in? %>
+		<%= link_to "Learn More", '/about', class: "btn btn-success wide" %>
+	<% else %>
+		<%= link_to "Learn More", '/about', class: "btn btn-success" %>
+	<% end %>
 </div>

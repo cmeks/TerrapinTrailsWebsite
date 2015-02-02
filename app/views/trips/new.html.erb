@@ -1,3 +1,16 @@
+<script>
+  $(document).ready(function(){
+    $('#show_hide').hide();
+    $('#yes_no_yes').click(function() {
+      $('#show_hide').show();
+    });
+
+    $('#yes_no_no').click(function(){
+      $('#show_hide').hide();
+    })
+  });
+</script>
+
 <% provide(:title, 'Create a Trip') %>
 <h1 class="center header">Create a Trip!</h1>
 
@@ -24,16 +37,25 @@
             <%= f.label :cost, "Cost: $" %>
             <%= f.number_field :cost %>
           </div>
-          <div> 
-            <%= f.label :pretrip_datetime %>
-            <div>
-              <%= f.datetime_select :pretrip_datetime, ampm: true, class: 'form-control' %>
-            </div>
-          </div>
-
-          <%= f.label :pretrip_location %>
           <div>
-            <%= f.text_field :pretrip_location, class: 'form-control wide' %>
+            <%= label_tag "Is there a Pretrip?" %>
+            <%= radio_button_tag(:yes_no, "yes")%>
+            <%= label_tag(:yes, "Yes") %>
+            <%= radio_button_tag(:yes_no, "no") %>
+            <%= label_tag(:no, "No") %>
+          </div>
+          <div id="show_hide">
+            <div> 
+              <%= f.label :pretrip_datetime %>
+              <div>
+                <%= f.datetime_select :pretrip_datetime, ampm: true, class: 'form-control' %>
+              </div>
+            </div>
+
+            <%= f.label :pretrip_location %>
+            <div>
+              <%= f.text_field :pretrip_location, class: 'form-control wide' %>
+            </div>
           </div>
 
           <%= f.label :spots %>
@@ -55,8 +77,11 @@
           <div class='field'>
             <%= f.bootsy_area :description, editor_options: {image: false}, class: 'description form-control' %>
           </div>
-
-      		<%= f.submit "Create my trip", class: "btn btn-primary wide" %>
+          
+          <div class="buttons">
+      		  <%= f.submit "Create my trip", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
+            <%= link_to "Cancel", '/trips', {:class=>"btn btn-primary"} %>
+          </div>
     	<% end %>
   	</div>
 </div>

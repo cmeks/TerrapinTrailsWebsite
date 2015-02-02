@@ -15,11 +15,11 @@ class Trip < ActiveRecord::Base
   	validates :name, presence: true, length: { maximum: 100 }
   	validates :description, presence: true
   	validates :start_date, presence: true
-  	validates :pretrip_location, presence: true
-    validates :cost, presence: true
-    validates :pretrip_datetime, presence: true
-    validates :spots, presence: true
+  	#validates :pretrip_location, presence: true, allow_nil: true
+    validates :cost, presence: true, numericality: {greater_than: 0}
+    #validates :pretrip_datetime, presence: true, allow_nil: true
+    validates :spots, presence: true, numericality: { greater_than: 0 }
     validates :location, presence: true
     validates :experience_level, presence: true
-    validates :end_date, presence: true
+    validates :end_date, presence: true, date: { :after_or_equal_to => :start_date, message: 'must be after or equal to the start date'}
 end

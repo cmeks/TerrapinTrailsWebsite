@@ -26,6 +26,7 @@ gem 'autoprefixer-rails'
 gem 'koala', '~> 1.10.0rc'
 gem 'bootsy'
 gem 'bcrypt', '3.1.7'
+gem 'date_validator'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

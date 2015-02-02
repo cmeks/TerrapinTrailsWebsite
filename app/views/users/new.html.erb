@@ -17,8 +17,11 @@
 
       		<%= f.label :password_confirmation, "Password confirmation" %>
       		<%= f.password_field :password_confirmation, class: 'form-control wide' %>
-
-      		<%= f.submit "Create my account", class: "btn btn-primary wide" %>
+          
+          <div class="buttons">
+        		<%= f.submit "Create my account", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
+            <%= link_to "Cancel", '/home', {:class=>"btn btn-primary"} %>
+          </div>
     	<% end %>
   	</div>
 </div>
