@@ -5,9 +5,12 @@ class TripsController < ApplicationController
 		@outgoing = Array.new
 		@past = Array.new
 		@leading = Array.new
+		@on = Array.new
 		@trips.each do |f|
 			if logged_in? && f.user == current_user && f.end_date > Time.now
 				@leading.push(f)
+			elsif logged_in? && f.start_date > Time.now && f.users.include?(current_user)
+				@on.push(f)
 			elsif f.start_date < Time.now && f.end_date > Time.now
 				@outgoing.push(f)
 			elsif f.start_date > Time.now && f.end_date > Time.now
