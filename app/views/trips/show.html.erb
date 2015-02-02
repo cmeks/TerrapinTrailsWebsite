@@ -30,7 +30,7 @@
 		  <%= render 'signup_form' if logged_in? %>
         <% end %>
         <div class='push-down-small'>
-            <% if @on_trip == true && !(@user_trip.on_waitlist == 1)  %>
+            <% if @on_trip == true && !(@user_trip.on_waitlist == 1) && @trip.start_date > Time.now %>
                 <% if @car.nil? && @user_trip.users_cars.count == 0 %> 
                     <%= form_tag(car_path, method: "get") do %>
                         <%= hidden_field_tag(:trip_id, @trip.id) %>
@@ -43,7 +43,7 @@
                 <% end %>
             <% end %>
         </div>
-        <% if logged_in? && current_user.id == @trip.user.id %>
+        <% if logged_in? && current_user.id == @trip.user.id && @trip.start_date > Time.now %>
             <div class='push-down-small'>
                 <%= button_to "Edit this Trip", edit_trip_path(@trip), :class => "btn btn-primary btn-md", :method => :get  %>
             </div>
