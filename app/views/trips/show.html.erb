@@ -66,7 +66,9 @@
   	<li class="active"><a href="#details" data-toggle="tab">Details</a></li>
     <% if @on_trip == true %>
         <li><a href="#carpools" data-toggle="tab">Carpools</a></li>
-        <li><a href="#going" data-toggle="tab">Who is going</a></li>
+        <% if @trip.user == current_user %>
+            <li><a href="#going" data-toggle="tab">Who is going</a></li>
+        <% end %>
     <% end %>
 </ul>
 
@@ -90,6 +92,7 @@
         </div>
         <% if @on_trip == true %>
             <div class="tab-pane fade" id="carpools">
+                <% if @carpools.count > 0 %>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -156,11 +159,16 @@
                         <% end %>
                     </tbody>
                 </table>
-            </div>
-            <div class="tab-pane fade" id="going">
-                <% @users.each do |user| %>
-                    <h3 class="center"><%= link_to user.name, user %></h3>
+                <% else %>
+                    <h2 class="center"> There are no cars on this Trip </h2>
                 <% end %>
             </div>
+            <% if @trip.user == current_user %>
+                <div class="tab-pane fade" id="going">
+                    <% @users.each do |user| %>
+                        <h3 class="center"><%= link_to user.name, user %></h3>
+                    <% end %>
+                </div>
+            <% end %>
         <% end %>
 </div>
