@@ -36,7 +36,8 @@
                         <%= hidden_field_tag(:trip_id, @trip.id) %>
                         <%= submit_tag 'Sign a Car up!', class: 'small-padding btn btn-md btn-primary' %>
                     <% end %>
-                <% else %>
+                <% end %>
+                <% if !@car.nil? %>
                     <%= form_for(@car, html: { method: :delete }) do |f| %>
                         <%= f.submit "Remove your Car", class: "btn", data: { disable_with: "Please wait..." } %>
                     <% end %>
