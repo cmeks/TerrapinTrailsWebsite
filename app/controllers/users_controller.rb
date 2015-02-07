@@ -1,7 +1,36 @@
 class UsersController < ApplicationController
-
 	  def show
     	@user = User.find(params[:id])
+      @current_trips = Array.new
+      if @user.role == 1
+        @position = "Member"
+      elsif @user.role == 2
+        @position = "Trip Leader"
+      elsif @user.role == 3
+        @position = "Trail Maintenance Officer"
+      elsif @user.role == 4
+        @position = "Director of Outreach"
+      elsif @user.role == 5
+        @position = "Secretary"
+      elsif @user.role == 6
+        @position = "Trip Manager"
+      elsif @user.role == 7
+        @position = "Gear Manager"
+      elsif @user.role == 8
+        @position = "Vice President"
+      elsif @user.role == 9
+        @position = "President"
+      else
+        @position = "Webmaster"
+      end
+
+      if @user.trips.count > 0
+        @user.trips.each do |trip|
+          if !(trip.end_date < Time.now)
+            @current_trips.push(trip)
+          end
+        end
+      end
   	end
 
   	def new
