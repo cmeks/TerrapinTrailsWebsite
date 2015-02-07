@@ -11,6 +11,11 @@ class UsersTripsController < ApplicationController
 
 	def destroy
 		user_trip = UsersTrip.find(params[:id])
+		trip = Trip.find(user_trip.trip_id)
+		car = trip.carpools.find_by(user_id: user_trip.user_id)
+		if !car.nil?
+			car.destroy
+		end
 		user_trip.destroy
     	redirect_to :back
 	end

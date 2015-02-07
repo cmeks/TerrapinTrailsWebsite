@@ -23,14 +23,34 @@ class TripsController < ApplicationController
 
 	def show
 		@trip = Trip.find(params[:id])
-		@users = @trip.users
+		#@users = @trip.users
 		@carpools = @trip.carpools
 		@on_trip = @trip.users.include?(current_user)
+		@cars_on_trip = Array.new
+		@cars_on_waitlist = Array.new
+		@waitlist_count = 0
+		@on_trip_count = 0
+		@trip.users_trips.each do |user|
+			if user.on_waitlist == 1
+				@waitlist_count = @waitlist_count + 1
+			else
+				@on_trip_count = @on_trip_count + 1
+			end
+		end
 		if logged_in?
 			@car = current_user.carpools.find_by(trip_id: @trip.id)
 		end
 		if @on_trip == true
 			@user_trip = @trip.users_trips.find_by(user_id: current_user.id)
+		end
+		@carpools.each do |car|
+			driver_id = car.user.id
+			driver = @trip.users_trips.find_by(user_id: driver_id);
+			if driver.on_waitlist == 0
+				@cars_on_trip.push(car)
+			else
+				@cars_on_waitlist.push(car)
+			end
 		end
 	end
 
@@ -65,6 +85,28 @@ class TripsController < ApplicationController
 	def car
 		update_trip_id(params[:trip_id])
 		redirect_to newCar_path
+	end
+
+	def off_waitlist
+		user_trip = UsersTrip.find(params[:id])
+		if user_trip.update_attribute(:on_waitlist, 0)
+			flash[:success] = "User pulled on the waitlist"
+			redirect_to user_trip.trip
+		else
+			flash[:danger] = "There was an error, the user was not pulled off the waitlist"
+			redirect_to user_trip.trip
+		end
+	end
+
+	def on_waitlist
+		user_trip = UsersTrip.find(params[:id])
+		if user_trip.update_attribute(:on_waitlist, 1)
+			flash[:success] = "User put on the waitlist"
+			redirect_to user_trip.trip
+		else
+			flash[:danger] = "There was an error, the user was not put on the waitlist"
+			redirect_to user_trip.trip
+		end
 	end
 
 	def destroy

@@ -16,7 +16,7 @@ class Trip < ActiveRecord::Base
   	validates :description, presence: true
   	validates :start_date, presence: true
   	#validates :pretrip_location, presence: true, allow_nil: true
-    validates :cost, presence: true, numericality: {greater_than: 0}
+    validates :cost, presence: true, numericality: {greater_than_or_equal_to: 0}
     #validates :pretrip_datetime, presence: true, allow_nil: true
     validates :spots, presence: true, numericality: { greater_than: 0 }
     validates :location, presence: true

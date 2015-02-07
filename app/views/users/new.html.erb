@@ -17,6 +17,10 @@
 
       		<%= f.label :password_confirmation, "Password confirmation" %>
       		<%= f.password_field :password_confirmation, class: 'form-control wide' %>
+
+          <div>
+            <%= f.hidden_field :role, :value => 1 %>
+          </div>
           
           <div class="buttons">
         		<%= f.submit "Create my account", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>

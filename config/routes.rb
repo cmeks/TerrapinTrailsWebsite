@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   match '/home', to: 'static_pages#home', via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/testing', to: 'static_pages#testing', via: 'get'
+  match '/change_role', to: 'static_pages#change_role', via: 'get'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
@@ -12,6 +13,9 @@ Rails.application.routes.draw do
   get 'newCar' => 'carpools#new'
   get 'car' => 'trips#car'
   get 'edit_car' => 'carpools#edit'
+  get 'off_waitlist' => 'trips#off_waitlist'
+  get 'on_waitlist' => 'trips#on_waitlist'
+  get 'role_change' => 'users#role_change'
 
   #for joining and leaving a car
   get 'car_join' => 'users_cars#create_destroy'

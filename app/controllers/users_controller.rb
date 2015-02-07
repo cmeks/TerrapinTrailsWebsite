@@ -19,11 +19,26 @@ class UsersController < ApplicationController
     	end
   	end
 
+    def index
+      @users = User.all.order('name asc')
+    end
+
+    def role_change
+      user = User.find(params['user']['id'])
+      if user.update_attribute(:role, params[:role])
+        flash[:success] = "Users role updated"
+        redirect_to '/users'
+      else
+        flash[:danger] = "There was an error, the User's role was not changed"
+        redirect_to '/change_role'
+      end
+    end
+
   	private
 
   		def user_params
     		params.require(:user).permit(:name, :email, :password, 
-    			:password_confirmation)
+    			:password_confirmation, :role)
     	end
 
 

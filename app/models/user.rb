@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 	
 	#passwords MUST have a minimum length of 6
   	validates :password, length: { minimum: 6 }
-    #validates :role, numericality: { less_than_or_equal_to: 10 }, numericality: { greater_than: 1}
+    validates :role, numericality: { less_than_or_equal_to: 10 }, numericality: { greater_than_or_equal_to: 1}
 	
 	# Returns the hash digest of the given string.
   	def User.digest(string)

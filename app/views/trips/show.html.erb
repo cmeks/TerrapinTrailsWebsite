@@ -1,13 +1,3 @@
-<% 
-    if @trip.spots + 1 - @users.count > 0 
-        spots_left = @trip.spots - @users.count
-        is_waitlist = false
-    else 
-        spots_left = 0
-        waitlist = @users.count - @trip.spots
-        is_waitlist = true
-    end
-%>
 <% provide(:title, @trip.name) %>
 <div class='row header'>
 	<div class='col-md-8'>
@@ -18,9 +8,9 @@
         </div>
         <h3> 
             Total spots: <%= @trip.spots %>, 
-            Spots left: <%= spots_left %> 
-            <% if is_waitlist == true %>
-                , Waitlist: <%= waitlist %>
+            Spots left: <%= @trip.spots - @on_trip_count %> 
+            <% if @waitlist_count > 0 %>
+                , Waitlist: <%= @waitlist_count %>
             <% end %>
         </h3>
         <h3> Experience Level: <%= @trip.experience_level %> </h3>
@@ -30,7 +20,7 @@
 		  <%= render 'signup_form' if logged_in? %>
         <% end %>
         <div class='push-down-small'>
-            <% if @on_trip == true && !(@user_trip.on_waitlist == 1) && @trip.start_date > Time.now %>
+            <% if @on_trip == true && @trip.start_date > Time.now %>
                 <% if @car.nil? && @user_trip.users_cars.count == 0 %> 
                     <%= form_tag(car_path, method: "get") do %>
                         <%= hidden_field_tag(:trip_id, @trip.id) %>
@@ -66,9 +56,9 @@
   	<li class="active"><a href="#details" data-toggle="tab">Details</a></li>
     <% if @on_trip == true %>
         <li><a href="#carpools" data-toggle="tab">Carpools</a></li>
-        <% if @trip.user == current_user %>
-            <li><a href="#going" data-toggle="tab">Who is going</a></li>
-        <% end %>
+    <% end %>
+    <% if @trip.user == current_user %>
+       <li><a href="#going" data-toggle="tab">Who is going</a></li>
     <% end %>
 </ul>
 
@@ -80,19 +70,24 @@
             	</div>
             </div>
             <div class="push-down">
+                <h4> Trip Leader's Email: <%= @trip.user.email %> </h4>
                 <% if !(@trip.pretrip_location == "") %>
                     <h4> Pretrip at <%= @trip.pretrip_location %> 
                         on <%= @trip.pretrip_datetime.strftime("%b %d %I:%M %p") %> 
                     </h4>
                 <% else %>
-                    <h4> There is no pretrip for this Trip </h4>
+                    <h4> There is no pretrip for this trip </h4>
                 <% end %>
                 <h4> Cost: $<%= @trip.cost %> </h4>
+                <h4> Status: Open </h4>
             </div>
         </div>
         <% if @on_trip == true %>
             <div class="tab-pane fade" id="carpools">
-                <% if @carpools.count > 0 %>
+                <% if @cars_on_trip.count > 0 %>
+                <% if current_user == @trip.user && @cars_on_waitlist.count > 0 %>
+                    <h3> Cars on the Trip </h3>
+                <% end %>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -101,7 +96,7 @@
                         </tr>
                      </thead>
                      <tbody>
-                        <% @carpools.each do |carr| %>
+                        <% @cars_on_trip.each do |carr| %>
                             <tr>
                                 <td>
                                     <table border="0">
@@ -159,16 +154,104 @@
                         <% end %>
                     </tbody>
                 </table>
-                <% else %>
-                    <h2 class="center"> There are no cars on this Trip </h2>
+                <% end %>
+                <% if @cars_on_waitlist.count > 0 && current_user == @trip.user%>
+                    <h3> Cars on the Waitlist </h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Car</th>
+                                <th>Passengers</th>
+                            </tr>
+                         </thead>
+                         <tbody>
+                            <% @cars_on_waitlist.each do |car| %>
+                                <tr>
+                                    <td>
+                                        <table border="0">
+                                            <tr><th> <%= car.color %> <%= car.make %> <%= car.model %> </th></tr>
+                                            <tr><td> Driver: <%= car.user.name %> </td></tr>
+                                            <tr><td> Leaving: <%= car.leave_time.strftime("%b %d %I:%M %p") %></td></tr>
+                                            <tr><td> Size: <%= car.seats - car.users_trips.count %> </td></tr>
+                                            <tr><td> <br/> </td></tr>
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <% if !@car.nil? && car.id == @car.id %>
+                                                            <%= form_tag(edit_car_path, method: "get") do %>
+                                                                <%= hidden_field_tag(:trip_id, @trip.id) %>
+                                                                <%= hidden_field_tag(:car_id, @car.id) %>
+                                                                <%= submit_tag 'Edit your Car!', class: 'btn btn-default' %>
+                                                            <% end %>
+                                                        <% end %>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            <% end %>
+                         </tbody>
+                     </table>
+                <% end %>
+                <% if @carpools.count == 0 %>
+                    <h2 class="center"> There are no cars on this trip </h2>
                 <% end %>
             </div>
-            <% if @trip.user == current_user %>
-                <div class="tab-pane fade" id="going">
-                    <% @users.each do |user| %>
-                        <h3 class="center"><%= link_to user.name, user %></h3>
+        <% end %>
+        <% if @trip.user == current_user %>
+            <div class="tab-pane fade" id="going">
+                <% if @trip.users.count > 0 %>
+                    <% if @on_trip_count > 0 %>
+                        <h3> Users on the trip </h3>
+                        <% @trip.users_trips.each do |f| %>
+                            <% if f.on_waitlist == 0 %>
+                                <ul class="list-inline">
+                                    <li>
+                                        <h4><%= link_to f.user.name, f.user %></h4>
+                                    </li>
+                                    <li>
+                                        <%= form_for(f, html: { method: :delete }) do |f| %>
+                                            <%= f.submit "Remove this person", class: "btn btn-danger btn-xs", data: { disable_with: "Please wait..." } %>
+                                        <% end %>
+                                    </li>
+                                    <li>
+                                        <%= form_tag(on_waitlist_path, method: "get") do %>
+                                            <%= hidden_field_tag(:id, f.id) %>
+                                            <%= submit_tag 'Put on the waitlist', class: 'btn btn-warning btn-xs', data: { disable_with: "Please wait..." } %>
+                                        <% end %>
+                                    </li>
+                                </ul>
+                            <% end %>
+                        <% end %>
                     <% end %>
-                </div>
-            <% end %>
+                    <% if @waitlist_count > 0 %>
+                        <h3> Users on the waitlist </h3>
+                        <% @trip.users_trips.each do |f| %>
+                            <% if f.on_waitlist == 1 %>
+                                <ul class="list-inline">
+                                    <li>
+                                        <h4><%= link_to f.user.name, f.user %></h4>
+                                    </li>
+                                    <li>
+                                        <%= form_for(f, html: { method: :delete }) do |f| %>
+                                            <%= f.submit "Remove this person", class: "btn btn-danger btn-xs", data: { disable_with: "Please wait..." } %>
+                                        <% end %>
+                                    </li>
+                                    <li>
+                                        <%= form_tag(off_waitlist_path, method: "get") do %>
+                                            <%= hidden_field_tag(:id, f.id) %>
+                                            <%= submit_tag 'Pull off the waitlist', class: 'btn btn-warning btn-xs', data: { disable_with: "Please wait..." } %>
+                                        <% end %>
+                                    </li>
+                                </ul>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <h3 class="center"> There is no one signed up for this trip yet </h3>
+                <% end %>
+            </div>
         <% end %>
 </div>

@@ -8,4 +8,7 @@ class StaticPagesController < ApplicationController
 
 	def testing
 	end
+
+	def change_role
+	end
 end

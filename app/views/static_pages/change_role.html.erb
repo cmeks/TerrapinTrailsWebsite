@@ -1,0 +1,15 @@
+<div class="header center">
+	<h1> Change a user's role </h1>
+</div>
+
+<%= form_tag(role_change_path, method: "get") do %>
+	<div class="center">
+		<%= collection_select(:user, :id, User.all, :id, :name) %>
+	</div>
+	<div class="center">
+		<%= select_tag(:role, options_for_select([['Member', 1], ['Trip Leader', 2], ['Trail Maintenance Officer', 3], ['Director of Outreach', 4], ['Secretary', 5], ['Trip Manager', 6], ['Gear Manager', 7], ['Vice President', 8], ['President', 9]])) %>
+	</div>
+	<div class="center">
+    	<%= submit_tag 'Change this users role', class: 'btn btn-warning btn-md center', data: { disable_with: "Please wait..." } %>
+    </div>
+<% end %>
