@@ -1,5 +1,5 @@
 <% provide(:title, "Edit Trip") %>
-<h1>Update your Trip!</h1>
+<h1 class="center">Update your Trip!</h1>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
@@ -48,6 +48,26 @@
       <%= f.select(:experience_level, [['Beginner'], ['Intermediate'], ['Advanced'], ['All Levels']]) %>
 
       <div>
+        <ul class="list-inline">
+          <li>
+            <%= f.label :status, "Status: " %>
+          </li>
+          <li>
+            <%= f.radio_button(:status, 0, checked: true) %>
+            <%= label_tag(:status, "Hidden") %>
+          </li>
+          <li>
+            <%= f.radio_button(:status, 1) %>
+            <%= label_tag(:status, "Closed") %>
+          </li>
+          <li>
+            <%= f.radio_button(:status, 2) %>
+            <%= label_tag(:status, "Open") %>
+          </li>
+        </ul>
+      </div>
+
+      <div>
         <%= f.hidden_field :user_id, :value => current_user.id %>
       </div>
 
@@ -57,10 +77,12 @@
       </div>
       
       <div class="buttons">
-        <%= f.submit "Update my Trip", class: "btn btn-primary" %>
+        <%= f.submit "Update my Trip", class: "btn btn-primary", :method => :update %>
         <%= link_to "Cancel", @trip, {:class=>"btn btn-primary"} %>
-        <%= button_to "Delete this Trip", @trip, :method => :delete, class: "btn btn-primary" %>
       </div>
     <% end %>
+    <div class="buttons">
+      <%= button_to "Delete this Trip", @trip, :method => :delete, class: "btn btn-primary" %>
+    </div>
   </div>
 </div>

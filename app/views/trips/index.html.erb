@@ -28,12 +28,23 @@
    				 </thead>
    				 <tbody>
    				 	<% @current.each do |trip| %>
-   				 		<tr>
-	    					<th> <%= link_to trip.name, trip %> </th>
-	    					<th> <%= trip.user.name %> </th>
-	    					<th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
-	    					<th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
-    					</tr>
+              <% if trip.status > 0 %>
+     				 		<tr>
+  	    					<th> <%= link_to trip.name, trip %> </th>
+  	    					<th> <%= trip.user.name %> </th>
+  	    					<th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+  	    					<th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+      					</tr>
+              <% else %>
+                <% if trip.status == 0 && logged_in? && (trip.user == current_user || current_user.role >= 8)  %>
+                  <tr>
+                    <td class="text-muted"> <%= link_to trip.name, trip , class: "text-muted" %> </td>
+                    <td class="text-muted"> <%= trip.user.name %> </td>
+                    <td class="text-muted"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </td>
+                    <td class="text-muted"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </td>
+                  </tr>
+                <% end %>
+              <% end %>
   					<% end %>
   				</tbody>
             </table>
@@ -95,12 +106,21 @@
        				 </thead>
                <tbody>
                   <% @leading.each do |trip| %>
-                    <tr>
-                      <th> <%= link_to trip.name, trip %> </th>
-                      <th> <%= trip.user.name %> </th>
-                      <th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
-                      <th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
-                    </tr>
+                    <% if trip.status > 0 %>
+                      <tr>
+                        <th> <%= link_to trip.name, trip %> </th>
+                        <th> <%= trip.user.name %> </th>
+                        <th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                        <th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                      </tr>
+                    <% else %>
+                      <tr>
+                        <th class="text-muted"> <%= link_to trip.name, trip, class: "text-muted" %> </th>
+                        <th class="text-muted"> <%= trip.user.name %> </th>
+                        <th class="text-muted"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                        <th class="text-muted"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                      </tr>
+                    <% end %>
                   <% end %>
               </tbody>
             </table>

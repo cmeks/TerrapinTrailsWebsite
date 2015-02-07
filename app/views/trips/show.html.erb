@@ -16,7 +16,7 @@
         <h3> Experience Level: <%= @trip.experience_level %> </h3>
 	</div>
 	<div class='col-md-3 pull-right push-down'>
-        <% if @trip.start_date > Time.now %>
+        <% if @trip.start_date > Time.now  && @trip.status > 1%>
 		  <%= render 'signup_form' if logged_in? %>
         <% end %>
         <div class='push-down-small'>
@@ -79,7 +79,7 @@
                     <h4> There is no pretrip for this trip </h4>
                 <% end %>
                 <h4> Cost: $<%= @trip.cost %> </h4>
-                <h4> Status: Open </h4>
+                <h4> Status: <%= @status %> </h4>
             </div>
         </div>
         <% if @on_trip == true %>

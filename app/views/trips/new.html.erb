@@ -70,6 +70,26 @@
           <%= f.select(:experience_level, [['Beginner'], ['Intermediate'], ['Advanced'], ['All Levels']]) %>
 
           <div>
+            <ul class="list-inline">
+              <li>
+                <%= f.label :status, "Status: " %>
+              </li>
+              <li>
+                <%= f.radio_button(:status, 0, checked: true) %>
+                <%= label_tag(:status, "Hidden") %>
+              </li>
+              <li>
+                <%= f.radio_button(:status, 1) %>
+                <%= label_tag(:status, "Closed") %>
+              </li>
+              <li>
+                <%= f.radio_button(:status, 2) %>
+                <%= label_tag(:status, "Open") %>
+              </li>
+            </ul>
+          </div>
+
+          <div>
             <%= f.hidden_field :user_id, :value => current_user.id %>
           </div>
 

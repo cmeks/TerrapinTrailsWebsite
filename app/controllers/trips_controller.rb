@@ -52,6 +52,13 @@ class TripsController < ApplicationController
 				@cars_on_waitlist.push(car)
 			end
 		end
+		if @trip.status == 0
+			@status = "Hidden"
+		elsif @trip.status == 1
+			@status = "Closed"
+		else
+			@status = "Open"
+		end
 	end
 
 	def new
@@ -118,6 +125,6 @@ class TripsController < ApplicationController
 	private
 
 		def trip_params
-    		params.require(:trip).permit(:name, :start_date, :end_date, :description, :user_id, :pretrip_location, :pretrip_datetime, :cost, :spots, :location, :experience_level)
+    		params.require(:trip).permit(:name, :start_date, :end_date, :description, :user_id, :pretrip_location, :pretrip_datetime, :cost, :spots, :location, :experience_level, :status)
     	end
 end
