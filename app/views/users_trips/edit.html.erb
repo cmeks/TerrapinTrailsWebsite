@@ -1,2 +1,237 @@
-<% provide(:title, "Edit Car") %>
-<h1 class="center">Update your Trip info</h1>
+<% provide(:title, "Edit Trip Info") %>
+<h1 class="center">Update your trip signup info</h1>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for(@user_trip) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+          
+          <% if @trip.ask_tent == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_tent, "Do you need a tent? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_tent, 0) %>
+                  <%= label_tag(:ask_tent, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_tent, 1, checked: true) %>
+                  <%= label_tag(:ask_tent, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+  
+          <% if @trip.ask_bag == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_bag, "Do you need a sleeping bag? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_bag, 0) %>
+                  <%= label_tag(:ask_bag, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_bag, 1, checked: true) %>
+                  <%= label_tag(:ask_bag, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_pad == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_pad, "Do you need a sleeping pad? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_pad, 0) %>
+                  <%= label_tag(:ask_pad, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_pad, 1, checked: true) %>
+                  <%= label_tag(:ask_pad, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_pack == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_pack, "Do you need a backpack? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_pack, 0) %>
+                  <%= label_tag(:ask_pack, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_pack, 1, checked: true) %>
+                  <%= label_tag(:ask_pack, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_diet == 0 %>
+            <%= f.label :ask_diet, "Do you have any dietary restrictions?" %>
+            <div class='field'>
+              <%= f.text_area :ask_diet, class: 'form-control small_description'%>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_bike == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_bike, "Do you need a bike? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_bike, 0) %>
+                  <%= label_tag(:ask_bike, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_bike, 1, checked: true) %>
+                  <%= label_tag(:ask_bike, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_bike_rack == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_bike_rack, "Do you have a bike rack?" %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_bike_rack, 0) %>
+                  <%= label_tag(:ask_bike_rack, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_bike_rack, 1, checked: true) %>
+                  <%= label_tag(:ask_bike_rack, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_helmet == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_helmet, "Do need a helmet? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_helmet, 0) %>
+                  <%= label_tag(:ask_helmet, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_helmet, 1, checked: true) %>
+                  <%= label_tag(:ask_helmet, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_headlamp == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_headlamp, "Do you need a headlamp? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_headlamp, 0) %>
+                  <%= label_tag(:ask_headlamp, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_headlamp, 1, checked: true) %>
+                  <%= label_tag(:ask_headlamp, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_harness == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_harness, "Do you need a harness? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_harness, 0) %>
+                  <%= label_tag(:ask_harness, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_harness, 1, checked: true) %>
+                  <%= label_tag(:ask_harness, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_kayak == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_kayak, "Do you need a kayak? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_kayak, 0) %>
+                  <%= label_tag(:ask_kayak, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_kayak, 1, checked: true) %>
+                  <%= label_tag(:ask_kayak, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_climbing_shoes == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_climbing_shoes, "Do you need climbing shoes? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_climbing_shoes, 0) %>
+                  <%= label_tag(:ask_climbing_shoes, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_climbing_shoes, 1, checked: true) %>
+                  <%= label_tag(:ask_climbing_shoes, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @trip.ask_kneepads == 0 %>
+            <div>
+              <ul class="list-inline">
+                <li>
+                  <%= f.label :ask_kneepads, "Do you need kneepads? " %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_kneepads, 0) %>
+                  <%= label_tag(:ask_kneepads, "Yes") %>
+                </li>
+                <li>
+                  <%= f.radio_button(:ask_kneepads, 1, checked: true) %>
+                  <%= label_tag(:ask_kneepads, "No") %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+      
+      <div class="buttons">
+        <%= f.submit "Update my trip signup info", class: "btn btn-primary", :method => :update %>
+      </div>
+    <% end %>
+  </div>
+</div>

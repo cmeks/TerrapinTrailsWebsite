@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :carpools, only: [:new, :create, :destroy, :update, :edit]
 
   #adds all resources needed for usersTrips
-  resources :users_trips,  only: [:create, :destroy]
+  resources :users_trips,  only: [:create, :destroy, :edit, :update]
 
   #adds all resources needed for UsersCars
   resources :users_cars, only: [:create, :destroy, :create_destroy]

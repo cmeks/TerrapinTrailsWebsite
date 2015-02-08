@@ -16,7 +16,7 @@
         <h3> Experience Level: <%= @trip.experience_level %> </h3>
 	</div>
 	<div class='col-md-3 pull-right push-down'>
-        <% if @trip.start_date > Time.now  && @trip.status > 1%>
+        <% if @trip.start_date > Time.now  && @trip.status == 2 %>
 		  <%= render 'signup_form' if logged_in? %>
         <% end %>
         <div class='push-down-small'>
@@ -256,7 +256,7 @@
         <% end %> 
 </div>
 <div class="push-down">
-    <% if @on_trip %>
+    <% if @on_trip && @questions == true %>
         <%= form_tag(edit_user_trip_path, method: "get") do %>
             <%= hidden_field_tag(:trip_id, @trip.id) %>
             <%= hidden_field_tag(:user_trip_id, @user_trip.id) %>

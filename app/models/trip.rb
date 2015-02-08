@@ -26,6 +26,7 @@ class Trip < ActiveRecord::Base
     validates :ask_tent, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_bag, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_pad, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_pack, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_diet, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_bike_rack, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_helmet, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
@@ -34,4 +35,5 @@ class Trip < ActiveRecord::Base
     validates :ask_kayak, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_climbing_shoes, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_kneepads, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_bike, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
 end

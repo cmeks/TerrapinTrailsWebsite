@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207232924) do
+ActiveRecord::Schema.define(version: 20150208195520) do
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
     t.integer  "bootsy_resource_id"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20150207232924) do
     t.integer  "ask_kayak"
     t.integer  "ask_climbing_shoes"
     t.integer  "ask_kneepads"
+    t.integer  "ask_bike"
   end
 
   add_index "trips", ["user_id"], name: "index_trips_on_user_id"
@@ -117,6 +118,7 @@ ActiveRecord::Schema.define(version: 20150207232924) do
     t.integer  "ask_kayak"
     t.integer  "ask_climbing_shoes"
     t.integer  "ask_kneepads"
+    t.integer  "ask_bike"
   end
 
   add_index "users_trips", ["trip_id"], name: "index_users_trips_on_trip_id"

@@ -30,6 +30,7 @@ class TripsController < ApplicationController
 		@cars_on_waitlist = Array.new
 		@waitlist_count = 0
 		@on_trip_count = 0
+
 		@trip.users_trips.each do |user|
 			if user.on_waitlist == 1
 				@waitlist_count = @waitlist_count + 1
@@ -37,12 +38,14 @@ class TripsController < ApplicationController
 				@on_trip_count = @on_trip_count + 1
 			end
 		end
+
 		if logged_in?
 			@car = current_user.carpools.find_by(trip_id: @trip.id)
 		end
 		if @on_trip == true
 			@user_trip = @trip.users_trips.find_by(user_id: current_user.id)
 		end
+
 		@carpools.each do |car|
 			driver_id = car.user.id
 			driver = @trip.users_trips.find_by(user_id: driver_id);
@@ -52,12 +55,19 @@ class TripsController < ApplicationController
 				@cars_on_waitlist.push(car)
 			end
 		end
+
 		if @trip.status == 0
 			@status = "Hidden"
 		elsif @trip.status == 1
 			@status = "Closed"
 		else
 			@status = "Open"
+		end
+
+		if @trip.ask_bag == 0 || @trip.ask_tent == 0 || @trip.ask_pad == 0 || @trip.ask_pack == 0 || @trip.ask_diet == 0 || @trip.ask_bike_rack == 0 || @trip.ask_helmet == 0 || @trip.ask_headlamp == 0 || @trip.ask_harness == 0 || @trip.ask_kayak == 0 || @trip.ask_climbing_shoes == 0 || @trip.ask_kneepads == 0 || @trip.ask_bike == 0 
+			@questions = true
+		else
+			@questions = false
 		end
 	end
 
@@ -125,6 +135,6 @@ class TripsController < ApplicationController
 	private
 
 		def trip_params
-    		params.require(:trip).permit(:name, :start_date, :end_date, :description, :user_id, :pretrip_location, :pretrip_datetime, :cost, :spots, :location, :experience_level, :status, :ask_bag, :ask_tent, :ask_pad, :ask_diet, :ask_bike_rack, :ask_helmet, :ask_headlamp, :ask_harness, :ask_kayak, :ask_climbing_shoes, :ask_kneepads)
+    		params.require(:trip).permit(:name, :start_date, :end_date, :description, :user_id, :pretrip_location, :pretrip_datetime, :cost, :spots, :location, :experience_level, :status, :ask_bag, :ask_tent, :ask_pad, :ask_diet, :ask_bike_rack, :ask_helmet, :ask_headlamp, :ask_harness, :ask_kayak, :ask_climbing_shoes, :ask_kneepads, :ask_pack, :ask_bike)
     	end
 end

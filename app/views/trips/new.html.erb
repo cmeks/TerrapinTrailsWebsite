@@ -140,6 +140,22 @@
           <div>
             <ul class="list-inline">
               <li>
+                <%= f.label :ask_pack, "Do people on your trip need a backpack? " %>
+              </li>
+              <li>
+                <%= f.radio_button(:ask_pack, 0) %>
+                <%= label_tag(:ask_pack, "Yes") %>
+              </li>
+              <li>
+                <%= f.radio_button(:ask_pack, 1, checked: true) %>
+                <%= label_tag(:ask_pack, "No") %>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <ul class="list-inline">
+              <li>
                 <%= f.label :ask_diet, "Will there be food on your trip? " %>
               </li>
               <li>
@@ -149,6 +165,22 @@
               <li>
                 <%= f.radio_button(:ask_diet, 1, checked: true) %>
                 <%= label_tag(:ask_diet, "No") %>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <ul class="list-inline">
+              <li>
+                <%= f.label :ask_bike, "Do people on your trip need a bike? " %>
+              </li>
+              <li>
+                <%= f.radio_button(:ask_bike, 0) %>
+                <%= label_tag(:ask_bike, "Yes") %>
+              </li>
+              <li>
+                <%= f.radio_button(:ask_bike, 1, checked: true) %>
+                <%= label_tag(:ask_bike, "No") %>
               </li>
             </ul>
           </div>
