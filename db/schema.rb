@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207194238) do
+ActiveRecord::Schema.define(version: 20150207232924) do
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
     t.integer  "bootsy_resource_id"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 20150207194238) do
 
   create_table "trips", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "user_id"
     t.datetime "start_date"
     t.datetime "end_date"
@@ -61,6 +61,18 @@ ActiveRecord::Schema.define(version: 20150207194238) do
     t.string   "location"
     t.integer  "spots"
     t.integer  "status"
+    t.integer  "ask_tent"
+    t.integer  "ask_bag"
+    t.integer  "ask_pad"
+    t.integer  "ask_pack"
+    t.integer  "ask_diet"
+    t.integer  "ask_bike_rack"
+    t.integer  "ask_helmet"
+    t.integer  "ask_headlamp"
+    t.integer  "ask_harness"
+    t.integer  "ask_kayak"
+    t.integer  "ask_climbing_shoes"
+    t.integer  "ask_kneepads"
   end
 
   add_index "trips", ["user_id"], name: "index_trips_on_user_id"
@@ -90,9 +102,21 @@ ActiveRecord::Schema.define(version: 20150207194238) do
   create_table "users_trips", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "on_waitlist"
+    t.integer  "ask_tent"
+    t.integer  "ask_bag"
+    t.integer  "ask_pad"
+    t.integer  "ask_pack"
+    t.string   "ask_diet"
+    t.integer  "ask_bike_rack"
+    t.integer  "ask_helmet"
+    t.integer  "ask_headlamp"
+    t.integer  "ask_harness"
+    t.integer  "ask_kayak"
+    t.integer  "ask_climbing_shoes"
+    t.integer  "ask_kneepads"
   end
 
   add_index "users_trips", ["trip_id"], name: "index_users_trips_on_trip_id"

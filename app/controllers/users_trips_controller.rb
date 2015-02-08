@@ -19,4 +19,8 @@ class UsersTripsController < ApplicationController
 		user_trip.destroy
     	redirect_to :back
 	end
+
+	def edit
+		@user_trip = UsersTrip.find(params[:user_trip_id])
+	end
 end

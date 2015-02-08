@@ -125,6 +125,6 @@ class TripsController < ApplicationController
 	private
 
 		def trip_params
-    		params.require(:trip).permit(:name, :start_date, :end_date, :description, :user_id, :pretrip_location, :pretrip_datetime, :cost, :spots, :location, :experience_level, :status)
+    		params.require(:trip).permit(:name, :start_date, :end_date, :description, :user_id, :pretrip_location, :pretrip_datetime, :cost, :spots, :location, :experience_level, :status, :ask_bag, :ask_tent, :ask_pad, :ask_diet, :ask_bike_rack, :ask_helmet, :ask_headlamp, :ask_harness, :ask_kayak, :ask_climbing_shoes, :ask_kneepads)
     	end
 end

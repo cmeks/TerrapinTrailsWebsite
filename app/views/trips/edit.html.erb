@@ -79,10 +79,8 @@
       <div class="buttons">
         <%= f.submit "Update my Trip", class: "btn btn-primary", :method => :update %>
         <%= link_to "Cancel", @trip, {:class=>"btn btn-primary"} %>
+        <%= link_to "Delete this Trip", @trip, :method => :delete, class: "btn btn-primary" %>
       </div>
     <% end %>
-    <div class="buttons">
-      <%= button_to "Delete this Trip", @trip, :method => :delete, class: "btn btn-primary" %>
-    </div>
   </div>
 </div>

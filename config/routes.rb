@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'off_waitlist' => 'trips#off_waitlist'
   get 'on_waitlist' => 'trips#on_waitlist'
   get 'role_change' => 'users#role_change'
+  get 'edit_user_trip' => 'users_trips#edit'
 
   #for joining and leaving a car
   get 'car_join' => 'users_cars#create_destroy'

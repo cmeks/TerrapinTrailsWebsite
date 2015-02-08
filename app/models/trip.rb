@@ -23,4 +23,15 @@ class Trip < ActiveRecord::Base
     validates :location, presence: true
     validates :experience_level, presence: true
     validates :end_date, presence: true, date: { :after_or_equal_to => :start_date, message: 'must be after or equal to the start date'}
+    validates :ask_tent, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_bag, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_pad, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_diet, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_bike_rack, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_helmet, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_headlamp, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_harness, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_kayak, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_climbing_shoes, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+    validates :ask_kneepads, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
 end

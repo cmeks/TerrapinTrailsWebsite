@@ -253,5 +253,14 @@
                     <h3 class="center"> There is no one signed up for this trip yet </h3>
                 <% end %>
             </div>
+        <% end %> 
+</div>
+<div class="push-down">
+    <% if @on_trip %>
+        <%= form_tag(edit_user_trip_path, method: "get") do %>
+            <%= hidden_field_tag(:trip_id, @trip.id) %>
+            <%= hidden_field_tag(:user_trip_id, @user_trip.id) %>
+            <%= submit_tag 'Edit your signup info', class: 'btn btn-success form-control' %>
         <% end %>
+    <% end %>
 </div>
