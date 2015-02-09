@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Terrapin Trail Club</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <% @user ||= current_user %>
+	<div id="page">
+    	<div id="header">
+        	<%= render 'layouts/elements/header' %>
+        </div>
+        <div id="navbar">
+            <%= render 'layouts/elements/navbar' %>
+        </div>
+        <div id="body">
+            <div class="container-fluid">
+                <% flash.each do |message_type, message| %>
+                    <div class="alert alert-<%= message_type %>"><%= message %></div>
+                <% end %>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div id="content">
+                            <%= yield %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <%= render 'layouts/elements/footer' %>
+        </div>
+        <%= debug(params) if Rails.env.development? %>
+    </div>
+</body>
+</html>

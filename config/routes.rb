@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/testing', to: 'static_pages#testing', via: 'get'
   match '/change_role', to: 'static_pages#change_role', via: 'get'
+  match '/no_page', to: 'static_pages#not_implemented', via: 'get'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'

@@ -172,14 +172,16 @@ class TripsController < ApplicationController
 	end
 
 	def on_waitlist
-		user_trip = UsersTrip.find(params[:id])
-		if user_trip.update_attribute(:on_waitlist, 1)
-			user_trip.users_cars.destroy
+		@user_trip = UsersTrip.find(params[:id])
+		if @user_trip.update_attribute(:on_waitlist, 1)
+			@user_trip.users_cars.each do |user_car|
+				user_car.destroy
+			end
 			flash[:success] = "User put on the waitlist"
-			redirect_to user_trip.trip
+			redirect_to @user_trip.trip
 		else
 			flash[:danger] = "There was an error, the user was not put on the waitlist"
-			redirect_to user_trip.trip
+			redirect_to @user_trip.trip
 		end
 	end
 
