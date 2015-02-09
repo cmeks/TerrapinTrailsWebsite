@@ -5,6 +5,6 @@
 
 <div>
 	<% @users.each do |user| %>
-		<h2> <%= link_to user.name, user %> </h2>
+		<h2> <%= link_to user.first_name + " " + user.last_name, user %> </h2>
 	<% end %>
 </div>

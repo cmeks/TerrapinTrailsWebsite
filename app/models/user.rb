@@ -1,16 +1,22 @@
 class User < ActiveRecord::Base
+  attr_accessor :remember_token, :activation_token, :reset_token
+  before_save   :downcase_email
+  before_create :create_activation_digest
+
 	#associations
 	has_many :users_trips, dependent: :destroy
   has_many :carpools, dependent: :destroy
 	has_many :trips, :through => :users_trips
 
-	#creates the remember token for a user
-	attr_accessor :remember_token
-
 	#emails will be stored in downcase, this is standard
 	before_save { self.email = email.downcase }
 
-	validates :name,  presence: true, length: { maximum: 50 }
+	validates :first_name,  presence: true, length: { maximum: 50 }
+  validates :last_name,  presence: true, length: { maximum: 50 }
+  validates :ec_name,  presence: true, length: { maximum: 50 }
+  validates :ec_type,  presence: true, length: { maximum: 50 }
+  validates :ec_phone1,  presence: true
+  validates :ec_email,  presence: true, length: { maximum: 50 }
 
 	#making sure emails are valid with the correct regex and are unique
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -18,12 +24,13 @@ class User < ActiveRecord::Base
   		format: { with: VALID_EMAIL_REGEX },
   		uniqueness: { case_sensitive: false }
 
+    validates :ec_email,  presence: true, format: { with: VALID_EMAIL_REGEX }, length: { maximum: 255 }
+
 	#make sure the user has a secure password
   	has_secure_password
 	
 	#passwords MUST have a minimum length of 6
-  	validates :password, length: { minimum: 6 }
-    validates :role, numericality: { less_than_or_equal_to: 10 }, numericality: { greater_than_or_equal_to: 1}
+  	validates :password, length: { minimum: 6 }, allow_blank: true
 	
 	# Returns the hash digest of the given string.
   	def User.digest(string)
@@ -63,4 +70,51 @@ class User < ActiveRecord::Base
   	def forget
     	update_attribute(:remember_digest, nil)
   	end
+
+    def name
+      first_name + " " + last_name
+    end
+
+    # Returns true if the given token matches the digest.
+    def authenticated?(attribute, token)
+      digest = send("#{attribute}_digest")
+      return false if digest.nil?
+      BCrypt::Password.new(digest).is_password?(token)
+    end
+
+    def activate
+      update_attribute(:activated, 1)
+      update_attribute(:activated_at, Time.zone.now)
+    end
+
+    def send_activation_email
+      UserMailer.account_activation(self).deliver_now
+    end
+
+    # Sets the password reset attributes.
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  # Sends password reset email.
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+    private 
+
+      def downcase_email
+        self.email = email.downcase
+      end
+
+      def create_activation_digest
+        self.activation_token  = User.new_token
+        self.activation_digest = User.digest(activation_token)
+      end
 end

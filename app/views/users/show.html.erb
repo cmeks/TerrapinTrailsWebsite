@@ -3,7 +3,7 @@
 		<h1 style="text-shadow: 1px 1px 1px #ccc;"> <%= @user.name %> </h1>
 	</div>
 	<div class="col-md-4 push-down">
-		<button class="btn btn-primary pull-right">Edit Profile</button>
+		<%= button_to "Edit your profile", edit_user_path(@user), :class => "btn btn-primary btn-md pull-right", :method => :get  %>
 	</div>
 </div>
 
@@ -12,53 +12,86 @@
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div class="row">
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
 				Position:
 			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
 				<%= @position %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				Dues Paid: <i class="fa fa-times"></i>
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				Dues Paid: 
 			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
 				N/A
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				Waiver Signed: <i class="fa fa-check"></i>
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				Waiver Signed: 
 			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				07/18/1993
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				N/A
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
 				Join Date:
 			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
 				<%= @user.created_at.strftime("%b %d %I:%M %p") %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
 				Email Address:
 			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
 				<%= @user.email %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				Join Date:
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				Emergency Contact Name: 
 			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-				07/18/1993
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				<%= @user.ec_name %>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				Emergency Contact Relation: 
+			</div>
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				<%= @user.ec_type %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				Emergency Contact Email
+			</div>
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				<%= @user.ec_email %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				Emergency Contact Phone Number:
+			</div>
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				<%= @user.ec_phone1 %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				Emergency Contact Alternate Phone Number:
+			</div>
+			<div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+				<%= @user.ec_phone2 %>
+			</div>
+		</div>
+
 	</div>
 </div>
 

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   root 'static_pages#home'
   match '/home', to: 'static_pages#home', via: 'get'
@@ -35,6 +39,12 @@ Rails.application.routes.draw do
 
   #adds all resources needed for UsersCars
   resources :users_cars, only: [:create, :destroy, :create_destroy]
+
+  #adds all resources for account activations
+  resources :account_activations, only: [:edit]
+
+  #adds all resources for password forgetting/remembering
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -14,7 +14,7 @@ class Trip < ActiveRecord::Base
   	#validations
   	validates :name, presence: true, length: { maximum: 100 }
   	validates :description, presence: true
-  	validates :start_date, presence: true
+  	validates :start_date, presence: true, date: { :after => Time.now + 1.hour, message: 'must be later than 1 hour from now' }
     validates :status, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 2}
   	#validates :pretrip_location, presence: true, allow_nil: true
     validates :cost, presence: true, numericality: {greater_than_or_equal_to: 0}
@@ -22,7 +22,7 @@ class Trip < ActiveRecord::Base
     validates :spots, presence: true, numericality: { greater_than: 0 }
     validates :location, presence: true
     validates :experience_level, presence: true
-    validates :end_date, presence: true, date: { :after_or_equal_to => :start_date, message: 'must be after or equal to the start date'}
+    validates :end_date, presence: true, date: { :after => :start_date, message: 'must be after the start date'}
     validates :ask_tent, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_bag, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
     validates :ask_pad, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}

@@ -1,4 +1,4 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, 'Edit profile') %>
 <h1 class="center header">Sign up</h1>
 
 <div class="row">
@@ -24,7 +24,7 @@
           <%= f.label :ec_phone1, "Emergency Contact Phone Number" %>
           <%= f.text_field :ec_phone1, class: 'form-control wide', :placeholder => "(123) 456-7890" %>
 
-          <%= f.label :ec_phone2, "Emergency Contact Alternate Phone Number (optional)" %>
+          <%= f.label :ec_phone2, "Emergency Contact Alternate Phone Number" %>
           <%= f.text_field :ec_phone2, class: 'form-control wide', :placeholder => "(123) 456-7890" %>
 
           <%= f.label :ec_email, "Emergency Contact Email" %>
@@ -37,8 +37,8 @@
       		<%= f.password_field :password_confirmation, class: 'form-control wide' %>
           
           <div class="buttons">
-        		<%= f.submit "Create my account", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
-            <%= link_to "Cancel", '/home', {:class=>"btn btn-primary"} %>
+        		<%= f.submit "Update my account", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
+            <%= link_to "Cancel", '/home', { :class=>"btn btn-primary" } %>
           </div>
     	<% end %>
   	</div>

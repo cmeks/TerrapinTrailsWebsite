@@ -60,6 +60,9 @@
     <% if @trip.user == current_user %>
        <li><a href="#going" data-toggle="tab">Who is going</a></li>
     <% end %>
+    <% if @questions == true && @trip.user == current_user %>
+        <li><a href="#gear_needed" data-toggle="tab">Gear Needed for this trip</a></li>
+    <% end %>
 </ul>
 
 <div class="tab-content">
@@ -101,7 +104,7 @@
                                 <td>
                                     <table border="0">
                                         <tr><th> <%= carr.color %> <%= carr.make %> <%= carr.model %> </th></tr>
-                                        <tr><td> Driver: <%= carr.user.name %> </td></tr>
+                                        <tr><td> Driver: <%= carr.user.first_name + " " + carr.user.last_name %> </td></tr>
                                         <tr><td> Leaving: <%= carr.leave_time.strftime("%b %d %I:%M %p") %></td></tr>
                                         <tr><td> Size: <%= carr.seats - carr.users_trips.count %> </td></tr>
                                         <tr><td> <br/> </td></tr>
@@ -146,7 +149,7 @@
                                 <td>
                                     <table class="table table-hover table-condensed">
                                         <% carr.users_trips.each do |f| %>
-                                            <tr><td> <%= f.user.name %> </tr> </td>
+                                            <tr><td> <%= f.user.first_name + " " + f.user.last_name %> </tr> </td>
                                         <% end %>
                                     </table>
                                 </td>
@@ -170,7 +173,7 @@
                                     <td>
                                         <table border="0">
                                             <tr><th> <%= car.color %> <%= car.make %> <%= car.model %> </th></tr>
-                                            <tr><td> Driver: <%= car.user.name %> </td></tr>
+                                            <tr><td> Driver: <%= car.user.first_name + " " + car.user.last_name %> </td></tr>
                                             <tr><td> Leaving: <%= car.leave_time.strftime("%b %d %I:%M %p") %></td></tr>
                                             <tr><td> Size: <%= car.seats - car.users_trips.count %> </td></tr>
                                             <tr><td> <br/> </td></tr>
@@ -209,7 +212,7 @@
                             <% if f.on_waitlist == 0 %>
                                 <ul class="list-inline">
                                     <li>
-                                        <h4><%= link_to f.user.name, f.user %></h4>
+                                        <h4><%= link_to f.user.first_name + " " + f.user.last_name, f.user %></h4>
                                     </li>
                                     <li>
                                         <%= form_for(f, html: { method: :delete }) do |f| %>
@@ -232,7 +235,7 @@
                             <% if f.on_waitlist == 1 %>
                                 <ul class="list-inline">
                                     <li>
-                                        <h4><%= link_to f.user.name, f.user %></h4>
+                                        <h4><%= link_to f.user.first_name + " " + f.user.last_name, f.user %></h4>
                                     </li>
                                     <li>
                                         <%= form_for(f, html: { method: :delete }) do |f| %>
@@ -253,8 +256,112 @@
                     <h3 class="center"> There is no one signed up for this trip yet </h3>
                 <% end %>
             </div>
+            <% if @questions == true %>
+                <div class="tab-pane fade" id="gear_needed">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <% if @trip.ask_tent == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        Users on the trip that said they needed a tent:  <%= @tent_count %>
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_bag == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        Users on the trip that need a sleeping bag:  <%= @bag_count %>
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_pad == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need a sleeping pad:  <%= @pad_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_pack == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need a backpack:  <%= @pack_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_bike == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need a bike:  <%= @bike_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_bike_rack == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that have a bike rack:  <%= @bike_rack_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_helmet == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need a helmet:  <%= @helmet_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_headlamp == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need a headlamp:  <%= @headlamp_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_harness == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need a harness:  <%= @harness_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_kayak == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need a kayak:  <%= @kayak_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_climbing_shoes == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need climbing shoes:  <%= @climbing_shoes_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+
+                            <% if @trip.ask_kneepads == 0 %>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                        Users on the trip that need kneepads:  <%= @kneepads_count %> 
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
         <% end %> 
 </div>
+
 <div class="push-down">
     <% if @on_trip && @questions == true %>
         <%= form_tag(edit_user_trip_path, method: "get") do %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208195520) do
+ActiveRecord::Schema.define(version: 20150209013744) do
 
   create_table "bootsy_image_galleries", force: :cascade do |t|
     t.integer  "bootsy_resource_id"
@@ -79,13 +79,28 @@ ActiveRecord::Schema.define(version: 20150208195520) do
   add_index "trips", ["user_id"], name: "index_trips_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "password_digest"
     t.string   "remember_digest"
     t.integer  "role"
+    t.integer  "waiver_signed"
+    t.integer  "dues_paid"
+    t.datetime "waiver_signed_date"
+    t.datetime "dues_paid_date"
+    t.string   "ec_name"
+    t.string   "ec_type"
+    t.string   "ec_phone1"
+    t.string   "ec_phone2"
+    t.string   "ec_email"
+    t.string   "activation_digest"
+    t.integer  "activated",          default: 0
+    t.datetime "activated_at"
+    t.string   "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

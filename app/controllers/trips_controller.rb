@@ -30,12 +30,68 @@ class TripsController < ApplicationController
 		@cars_on_waitlist = Array.new
 		@waitlist_count = 0
 		@on_trip_count = 0
+		@bag_count = 0
+		@tent_count = 0
+		@pad_count = 0
+		@pack_count = 0
+		@bike_rack_count = 0
+		@helmet_count = 0
+		@headlamp_count = 0
+		@harness_count = 0
+		@kayak_count = 0
+		@climbing_shoes_count = 0
+		@kneepads_count = 0
+		@bike_count = 0
 
 		@trip.users_trips.each do |user|
 			if user.on_waitlist == 1
 				@waitlist_count = @waitlist_count + 1
 			else
 				@on_trip_count = @on_trip_count + 1
+			end
+
+			if @trip.ask_tent == 0 && user.ask_tent == 0 && user.on_waitlist == 0
+				@tent_count = @tent_count + 1
+			end
+
+			if @trip.ask_bag == 0 && user.ask_bag == 0 && user.on_waitlist == 0
+				@bag_count = @bag_count + 1
+			end
+
+			if @trip.ask_pad == 0 && user.ask_pad == 0 && user.on_waitlist == 0
+				@pad_count = @pad_count + 1
+			end
+
+			if @trip.ask_pack == 0 && user.ask_pack == 0 && user.on_waitlist == 0
+				@pack_count = @pack_count + 1
+			end
+
+			if @trip.ask_bike_rack == 0 && user.ask_bike_rack == 0 && user.on_waitlist == 0
+				@bike_rack_count = @bike_rack_count + 1
+			end
+
+			if @trip.ask_helmet == 0 && user.ask_helmet == 0 && user.on_waitlist == 0
+				@helmet_count = @helmet_count + 1
+			end
+
+			if @trip.ask_harness == 0 && user.ask_harness == 0 && user.on_waitlist == 0
+				@harness_count = @harness_count + 1
+			end
+
+			if @trip.ask_kayak == 0 && user.ask_kayak == 0 && user.on_waitlist == 0
+				@kayak_count = @kayak_count + 1
+			end
+
+			if @trip.ask_climbing_shoes == 0 && user.ask_climbing_shoes == 0 && user.on_waitlist == 0
+				@climbing_shoes_count = @climbing_shoes_count + 1
+			end
+
+			if @trip.ask_kneepads == 0 && user.ask_kneepads == 0 && user.on_waitlist == 0
+				@kneepads_count = @kneepads_count + 1
+			end
+
+			if @trip.ask_bike == 0 && user.ask_bike == 0 && user.on_waitlist == 0
+				@bike_count = @bike_count + 1
 			end
 		end
 
