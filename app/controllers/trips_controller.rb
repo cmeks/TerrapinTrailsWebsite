@@ -174,6 +174,7 @@ class TripsController < ApplicationController
 	def on_waitlist
 		user_trip = UsersTrip.find(params[:id])
 		if user_trip.update_attribute(:on_waitlist, 1)
+			user_trip.users_cars.destroy
 			flash[:success] = "User put on the waitlist"
 			redirect_to user_trip.trip
 		else
