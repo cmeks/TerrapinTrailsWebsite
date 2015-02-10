@@ -204,7 +204,7 @@
             </div>
         <% end %>
         <% if @trip.user == current_user || current_user.role > 2 %>
-            <% if current_user.role > 2 %>
+            <% if @trip.user == current_user || current_user.role > 2 %>
                 <div class="tab-pane fade" id="going">
                     <% if @trip.users.count > 0 %>
                         <% if @on_trip_count > 0 %>
