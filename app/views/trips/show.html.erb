@@ -60,8 +60,8 @@
     <% if @trip.user == current_user || (logged_in? && current_user.role > 2) %>
        <li><a href="#going" data-toggle="tab">Who is going</a></li>
     <% end %>
-    <% if @questions == true && @trip.user == current_user%>
-        <li><a href="#gear_needed" data-toggle="tab">Gear Needed for this trip</a></li>
+    <% if @trip.user == current_user%>
+        <li><a href="#gear_needed" data-toggle="tab">Information for your trip</a></li>
     <% end %>
 </ul>
 
@@ -258,10 +258,13 @@
                     <% end %>
                 </div>
             <% end %>
-            <% if @questions == true && @trip.user == current_user %>
+            <% if @trip.user == current_user %>
                 <div class="tab-pane fade" id="gear_needed">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <% if @questions == false && @trip.users.count == 0 %>
+                                <h3 class="center"> There is no information to display at the moment </h3>
+                            <% end %>
                             <% if @trip.ask_tent == 0 %>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -356,6 +359,30 @@
                                         Users on the trip that need kneepads:  <%= @kneepads_count %> 
                                     </div>
                                 </div>
+                            <% end %>
+
+                            <% if @trip.ask_diet == 0 %>
+                                <h4> Dietary Restriction for people on your trip </h4>
+                                <% @trip.users_trips.each do |f| %>
+                                    <% if f.on_waitlist == 0 %>
+                                        <ul class="list-inline">
+                                            <li> <%= f.user.name %>: </li>
+                                            <li> <%= f.ask_diet %> </li>
+                                        </ul>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+
+                            <% if @trip.users.count > 0 %>
+                                <h4> User Emails for people on your trip </h4>
+                                <% @trip.users_trips.each do |f| %>
+                                    <% if f.on_waitlist == 0 %>
+                                        <ul class="list-inline">
+                                            <li> <%= f.user.name %>: </li>
+                                            <li> <%= f.user.email %> </li>
+                                        </ul>
+                                    <% end %>
+                                <% end %>
                             <% end %>
                         </div>
                     </div>
