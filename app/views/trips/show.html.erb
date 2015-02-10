@@ -107,6 +107,7 @@
                                         <tr><td> Driver: <%= carr.user.first_name + " " + carr.user.last_name %> </td></tr>
                                         <tr><td> Leaving: <%= carr.leave_time.strftime("%b %d %I:%M %p") %></td></tr>
                                         <tr><td> Size: <%= carr.seats - carr.users_trips.count %> </td></tr>
+                                        <tr><td> Driver Email: <%= carr.user.email %> </td></tr>
                                         <tr><td> <br/> </td></tr>
                                         <tr>
                                             <td> 
@@ -149,7 +150,11 @@
                                 <td>
                                     <table class="table table-hover table-condensed">
                                         <% carr.users_trips.each do |f| %>
-                                            <tr><td> <%= f.user.first_name + " " + f.user.last_name %> </tr> </td>
+                                            <% if carr.user == current_user %>
+                                                <tr><td> <%= f.user.name + ":  " + f.user.email %> </tr></td>
+                                            <% else %>
+                                                <tr><td> <%= f.user.first_name + " " + f.user.last_name %> </tr> </td>
+                                            <% end %>
                                         <% end %>
                                     </table>
                                 </td>
@@ -176,6 +181,7 @@
                                             <tr><td> Driver: <%= car.user.first_name + " " + car.user.last_name %> </td></tr>
                                             <tr><td> Leaving: <%= car.leave_time.strftime("%b %d %I:%M %p") %></td></tr>
                                             <tr><td> Size: <%= car.seats - car.users_trips.count %> </td></tr>
+                                            <tr><td> Driver Email: <%= carr.user.email %> </td></tr>
                                             <tr><td> <br/> </td></tr>
                                             <tr>
                                                 <td>
@@ -362,7 +368,7 @@
                             <% end %>
 
                             <% if @trip.ask_diet == 0 %>
-                                <h4> Dietary Restriction for people on your trip </h4>
+                                <h4> Dietary Restrictions for people on your trip </h4>
                                 <% @trip.users_trips.each do |f| %>
                                     <% if f.on_waitlist == 0 %>
                                         <ul class="list-inline">
