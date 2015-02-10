@@ -57,10 +57,10 @@
     <% if @on_trip == true %>
         <li><a href="#carpools" data-toggle="tab">Carpools</a></li>
     <% end %>
-    <% if @trip.user == current_user %>
+    <% if @trip.user == current_user || current_user.role > 2 %>
        <li><a href="#going" data-toggle="tab">Who is going</a></li>
     <% end %>
-    <% if @questions == true && @trip.user == current_user %>
+    <% if @questions == true && @trip.user == current_user%>
         <li><a href="#gear_needed" data-toggle="tab">Gear Needed for this trip</a></li>
     <% end %>
 </ul>
@@ -203,60 +203,62 @@
                 <% end %>
             </div>
         <% end %>
-        <% if @trip.user == current_user %>
-            <div class="tab-pane fade" id="going">
-                <% if @trip.users.count > 0 %>
-                    <% if @on_trip_count > 0 %>
-                        <h3> Users on the trip </h3>
-                        <% @trip.users_trips.each do |f| %>
-                            <% if f.on_waitlist == 0 %>
-                                <ul class="list-inline">
-                                    <li>
-                                        <h4><%= link_to f.user.first_name + " " + f.user.last_name, f.user %></h4>
-                                    </li>
-                                    <li>
-                                        <%= form_for(f, html: { method: :delete }) do |f| %>
-                                            <%= f.submit "Remove this person", class: "btn btn-danger btn-xs", data: { disable_with: "Please wait..." } %>
-                                        <% end %>
-                                    </li>
-                                    <li>
-                                        <%= form_tag(on_waitlist_path, method: "get") do %>
-                                            <%= hidden_field_tag(:id, f.id) %>
-                                            <%= submit_tag 'Put on the waitlist', class: 'btn btn-warning btn-xs', data: { disable_with: "Please wait..." } %>
-                                        <% end %>
-                                    </li>
-                                </ul>
+        <% if @trip.user == current_user || current_user.role > 2 %>
+            <% if current_user.role > 2 %>
+                <div class="tab-pane fade" id="going">
+                    <% if @trip.users.count > 0 %>
+                        <% if @on_trip_count > 0 %>
+                            <h3> Users on the trip </h3>
+                            <% @trip.users_trips.each do |f| %>
+                                <% if f.on_waitlist == 0 %>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <h4><%= link_to f.user.first_name + " " + f.user.last_name, f.user %></h4>
+                                        </li>
+                                        <li>
+                                            <%= form_for(f, html: { method: :delete }) do |f| %>
+                                                <%= f.submit "Remove this person", class: "btn btn-danger btn-xs", data: { disable_with: "Please wait..." } %>
+                                            <% end %>
+                                        </li>
+                                        <li>
+                                            <%= form_tag(on_waitlist_path, method: "get") do %>
+                                                <%= hidden_field_tag(:id, f.id) %>
+                                                <%= submit_tag 'Put on the waitlist', class: 'btn btn-warning btn-xs', data: { disable_with: "Please wait..." } %>
+                                            <% end %>
+                                        </li>
+                                    </ul>
+                                <% end %>
                             <% end %>
                         <% end %>
-                    <% end %>
-                    <% if @waitlist_count > 0 %>
-                        <h3> Users on the waitlist </h3>
-                        <% @trip.users_trips.each do |f| %>
-                            <% if f.on_waitlist == 1 %>
-                                <ul class="list-inline">
-                                    <li>
-                                        <h4><%= link_to f.user.first_name + " " + f.user.last_name, f.user %></h4>
-                                    </li>
-                                    <li>
-                                        <%= form_for(f, html: { method: :delete }) do |f| %>
-                                            <%= f.submit "Remove this person", class: "btn btn-danger btn-xs", data: { disable_with: "Please wait..." } %>
-                                        <% end %>
-                                    </li>
-                                    <li>
-                                        <%= form_tag(off_waitlist_path, method: "get") do %>
-                                            <%= hidden_field_tag(:id, f.id) %>
-                                            <%= submit_tag 'Pull off the waitlist', class: 'btn btn-warning btn-xs', data: { disable_with: "Please wait..." } %>
-                                        <% end %>
-                                    </li>
-                                </ul>
+                        <% if @waitlist_count > 0 %>
+                            <h3> Users on the waitlist </h3>
+                            <% @trip.users_trips.each do |f| %>
+                                <% if f.on_waitlist == 1 %>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <h4><%= f.user.first_name + " " + f.user.last_name %></h4>
+                                        </li>
+                                        <li>
+                                            <%= form_for(f, html: { method: :delete }) do |f| %>
+                                                <%= f.submit "Remove this person", class: "btn btn-danger btn-xs", data: { disable_with: "Please wait..." } %>
+                                            <% end %>
+                                        </li>
+                                        <li>
+                                            <%= form_tag(off_waitlist_path, method: "get") do %>
+                                                <%= hidden_field_tag(:id, f.id) %>
+                                                <%= submit_tag 'Pull off the waitlist', class: 'btn btn-warning btn-xs', data: { disable_with: "Please wait..." } %>
+                                            <% end %>
+                                        </li>
+                                    </ul>
+                                <% end %>
                             <% end %>
                         <% end %>
+                    <% else %>
+                        <h3 class="center"> There is no one signed up for this trip yet </h3>
                     <% end %>
-                <% else %>
-                    <h3 class="center"> There is no one signed up for this trip yet </h3>
-                <% end %>
-            </div>
-            <% if @questions == true %>
+                </div>
+            <% end %>
+            <% if @questions == true && @trip.user == current_user %>
                 <div class="tab-pane fade" id="gear_needed">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -17,10 +17,13 @@ class StaticPagesController < ApplicationController
 	def not_implemented
 	end
 
+	def officers
+	end
+
 	private
 
 		def correct_user
 			user = current_user
-			redirect_to(root_url) unless user == current_user && user.role > 7
+			redirect_to(root_url) unless user == current_user && user.role > 2
 		end
 end

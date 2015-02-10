@@ -15,7 +15,7 @@
             <li><%= link_to "Calendar", '/no_page' %></li>
             <li><%= link_to "Albums", '/no_page' %></li>
             <li><%= link_to "Resources", '/no_page' %></li>
-            <li><%= link_to "Officers", '/no_page' %></li>
+            <li><%= link_to "Officers", '/officers' %></li>
             <li><%= link_to "Contact", '/no_page' %></li>
             <% if logged_in? && current_user.role > 7 %>
                 <li><%= link_to "All Members", users_path %></li>

@@ -1,6 +1,6 @@
 <% provide(:title, 'All Trips') %>
 <div class="header">
-  <% if logged_in? %>
+  <% if logged_in? && current_user.role > 1 %>
     <%= link_to "Create a new Trip!", 'trips/new', class: 'small-padding btn btn-info pull-right' %>
   <% end %>
   <h1>All trips</h1>
@@ -11,7 +11,9 @@
   	<li><a href="#outgoing" data-toggle="tab">Outgoing Trips</a></li>
   	<li><a href="#past" data-toggle="tab">Past Trips</a></li>
     <% if logged_in? %>
-  	 <li><a href="#leading" data-toggle="tab">Trips you're leading</a></li>
+      <% if current_user.role > 1 %>
+  	     <li><a href="#leading" data-toggle="tab">Trips you're leading</a></li>
+      <% end %>
      <li><a href="#on" data-toggle="tab">Trips you're on</a></li>
     <% end %>
 </ul>
@@ -28,7 +30,7 @@
    				 </thead>
    				 <tbody>
    				 	<% @current.each do |trip| %>
-              <% if trip.status > 0 %>
+              <% if trip.status == 2 %>
      				 		<tr>
   	    					<th> <%= link_to trip.name, trip %> </th>
   	    					<th> <%= trip.user.name %> </th>
@@ -36,13 +38,22 @@
   	    					<th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
       					</tr>
               <% else %>
-                <% if trip.status == 0 && logged_in? && (trip.user == current_user || current_user.role >= 8)  %>
+                <% if trip.status == 0 && logged_in? && (trip.user == current_user || current_user.role >= 3)  %>
                   <tr>
                     <td class="text-muted"> <%= link_to trip.name, trip , class: "text-muted" %> </td>
                     <td class="text-muted"> <%= trip.user.name %> </td>
                     <td class="text-muted"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </td>
                     <td class="text-muted"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </td>
                   </tr>
+                <% else %>
+                  <% if trip.status == 1 %>
+                    <tr>
+                      <th class="red"> <%= link_to trip.name, trip, class: "red" %> </th>
+                      <th class="red"> <%= trip.user.name %> </th>
+                      <th class="red"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                      <th class="red"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                    </tr>
+                  <% end %>
                 <% end %>
               <% end %>
   					<% end %>
@@ -94,37 +105,50 @@
             </table>
         </div>
         <% if logged_in? %>
-          <div class="tab-pane fade" id="leading">
-              <table class="table table-hover">
-                <thead>
-        				  <tr>
-            				<th>Trip Name</th>
-            				<th>Trip Leader</th>
-            				<th>Start Date</th>
-            				<th>End Date</th>
-        				  </tr>
-       				 </thead>
-               <tbody>
-                  <% @leading.each do |trip| %>
-                    <% if trip.status > 0 %>
-                      <tr>
-                        <th> <%= link_to trip.name, trip %> </th>
-                        <th> <%= trip.user.name %> </th>
-                        <th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
-                        <th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
-                      </tr>
-                    <% else %>
-                      <tr>
-                        <th class="text-muted"> <%= link_to trip.name, trip, class: "text-muted" %> </th>
-                        <th class="text-muted"> <%= trip.user.name %> </th>
-                        <th class="text-muted"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
-                        <th class="text-muted"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
-                      </tr>
+          <% if current_user.role > 1 %>
+            <div class="tab-pane fade" id="leading">
+                <table class="table table-hover">
+                  <thead>
+          				  <tr>
+              				<th>Trip Name</th>
+              				<th>Trip Leader</th>
+              				<th>Start Date</th>
+              				<th>End Date</th>
+          				  </tr>
+         				 </thead>
+                 <tbody>
+                    <% @leading.each do |trip| %>
+                      <% if trip.status == 2 %>
+                        <tr>
+                          <th> <%= link_to trip.name, trip %> </th>
+                          <th> <%= trip.user.name %> </th>
+                          <th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                          <th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                        </tr>
+                      <% else %>
+                        <% if trip.status == 0 %>
+                          <tr>
+                            <th class="text-muted"> <%= link_to trip.name, trip, class: "text-muted" %> </th>
+                            <th class="text-muted"> <%= trip.user.name %> </th>
+                            <th class="text-muted"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                            <th class="text-muted"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                          </tr>
+                        <% else %>
+                          <% if trip.status == 1 %>
+                            <tr>
+                              <th class="red"> <%= link_to trip.name, trip, class: "red" %> </th>
+                              <th class="red"> <%= trip.user.name %> </th>
+                              <th class="red"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
+                              <th class="red"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
+                            </tr>
+                          <% end %>
+                        <% end %>
+                      <% end %>
                     <% end %>
-                  <% end %>
-              </tbody>
-            </table>
-          </div>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
           <div class="tab-pane fade" id="on">
               <table class="table table-hover">
                 <thead>
