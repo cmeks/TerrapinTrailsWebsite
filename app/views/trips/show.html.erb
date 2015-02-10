@@ -57,7 +57,7 @@
     <% if @on_trip == true %>
         <li><a href="#carpools" data-toggle="tab">Carpools</a></li>
     <% end %>
-    <% if @trip.user == current_user || current_user.role > 2 %>
+    <% if @trip.user == current_user || (logged_in? && current_user.role > 2) %>
        <li><a href="#going" data-toggle="tab">Who is going</a></li>
     <% end %>
     <% if @questions == true && @trip.user == current_user%>
@@ -203,8 +203,8 @@
                 <% end %>
             </div>
         <% end %>
-        <% if @trip.user == current_user || current_user.role > 2 %>
-            <% if @trip.user == current_user || current_user.role > 2 %>
+        <% if @trip.user == current_user || (logged_in? && current_user.role > 2) %>
+            <% if @trip.user == current_user || (logged_in? && current_user.role > 2) %>
                 <div class="tab-pane fade" id="going">
                     <% if @trip.users.count > 0 %>
                         <% if @on_trip_count > 0 %>
