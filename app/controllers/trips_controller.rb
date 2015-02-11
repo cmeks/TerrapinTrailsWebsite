@@ -78,6 +78,10 @@ class TripsController < ApplicationController
 				@harness_count = @harness_count + 1
 			end
 
+			if @trip.ask_headlamp == 0 && user.ask_headlamp == 0 && user.on_waitlist == 0
+				@headlamp_count = @headlamp_count + 1
+			end
+
 			if @trip.ask_kayak == 0 && user.ask_kayak == 0 && user.on_waitlist == 0
 				@kayak_count = @kayak_count + 1
 			end
