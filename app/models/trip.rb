@@ -9,7 +9,7 @@ class Trip < ActiveRecord::Base
   	has_many :users, :through => :users_trips
 
   	#make sure trips get ordered from newest to oldest
-  	default_scope -> { order(start_date: :desc) }
+  	default_scope -> { order(start_date: :asc) }
 
   	#validations
   	validates :name, presence: true, length: { maximum: 100 }
