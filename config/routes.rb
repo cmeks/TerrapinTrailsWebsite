@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
   mount Bootsy::Engine => '/bootsy', as: 'bootsy'
   root 'static_pages#home'
   match '/home', to: 'static_pages#home', via: 'get'
