@@ -54,7 +54,7 @@
 
 <ul class="nav nav-tabs nav-justified">
   	<li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-    <% if @on_trip == true %>
+    <% if @on_trip == true && @user_trip.on_waitlist == 0 %>
         <li><a href="#carpools" data-toggle="tab">Carpools</a></li>
     <% end %>
     <% if @trip.user == current_user || (logged_in? && current_user.role > 2) %>
