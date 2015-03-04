@@ -389,6 +389,15 @@
                                         </ul>
                                     <% end %>
                                 <% end %>
+                                <h4> User Emails for people on the Waitlist </h4>
+                                <% @trip.users_trips.each do |f| %>
+                                    <% if f.on_waitlist == 1 %>
+                                        <ul class="list-inline">
+                                            <li> <%= f.user.name %>: </li>
+                                            <li> <%= f.user.email %> </li>
+                                        </ul>
+                                    <% end %>
+                                <% end %>
                             <% end %>
                         </div>
                     </div>
