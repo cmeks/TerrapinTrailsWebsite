@@ -57,7 +57,7 @@
     <% if @on_trip == true && @user_trip.on_waitlist == 0 %>
         <li><a href="#carpools" data-toggle="tab">Carpools</a></li>
     <% end %>
-    <% if @on_trip == true %>
+    <% if @on_trip == true || @trip.user == current_user || (logged_in? && current_user.role > 2) %>
        <li><a href="#going" data-toggle="tab">Who is going</a></li>
     <% end %>
     <% if @trip.user == current_user%>
