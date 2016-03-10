@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 body { 
-    min-width: 1175px;
+    width:100%;
 }
 //all the styles for the main pages, jamisons CSS
 #header {
@@ -15,8 +15,30 @@ body {
     background-position: left bottom;
     background-repeat: no-repeat;
     color: #fff;
-    height: 150px;
     text-shadow: 5px 5px 15px #000;
+}
+
+
+@media (max-width:400px)
+{
+    #header {
+height:350px;
+}
+}
+
+
+@media (max-width:800px)
+{
+    #header {
+height:250px;
+}
+}
+
+@media (min-width:800px)
+{
+    #header {
+height:150px;
+}
 }
 
 #header h1, #header h2 {
