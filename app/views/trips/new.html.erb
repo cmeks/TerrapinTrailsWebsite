@@ -12,6 +12,8 @@
 </script>
 
 <% provide(:title, 'Create a Trip') %>
+<div class="letter">
+<center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
 <h1 class="center header">Create a Trip!</h1>
 
 <div class="row">
@@ -311,5 +313,6 @@
             <%= link_to "Cancel", '/trips', {:class=>"btn btn-primary"} %>
           </div>
     	<% end %>
+  	</div>
   	</div>
 </div>

@@ -1,4 +1,6 @@
 <div class="letter">
 <center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
-<h1>This page will be available soon</h1>
+<%= month_calendar do |date| %>
+  <%= date %>
+<% end %>
 </div>

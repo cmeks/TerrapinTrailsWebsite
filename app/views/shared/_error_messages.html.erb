@@ -1,4 +1,6 @@
 <% if object.errors.any? %>
+<div class="letter">
+<center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
   <div id="error_explanation">
       <div class="alert alert-danger">
           The form contains <%= pluralize(object.errors.count, "error") %>.
@@ -8,5 +10,6 @@
           <li><%= msg %></li>
       <% end %>
       </ul>
+  </div>
   </div>
 <% end %>

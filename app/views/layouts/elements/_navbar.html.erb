@@ -12,11 +12,11 @@
             <li><%= link_to "Home", '/home' %></li>
             <li><%= link_to "About", '/about' %></li>
             <li><%= link_to "Trips", trips_path %></li>
-            <li><%= link_to "Calendar", '/no_page' %></li>
-            <li><%= link_to "Albums", '/no_page' %></li>
-            <li><%= link_to "Resources", '/no_page' %></li>
+<!--             <li><%= link_to "Calendar", '/calendar' %></li> -->
+            <li><%= link_to "Albums", '/albums' %></li>
+<!--             <li><%= link_to "Resources", '/resources' %></li> -->
             <li><%= link_to "Officers", '/officers' %></li>
-            <li><%= link_to "Contact", '/no_page' %></li>
+            <li><%= link_to "Contact", '/contact' %></li>
             <% if logged_in? && current_user.role > 7 %>
                 <li><%= link_to "All Members", users_path %></li>
             <% end %>

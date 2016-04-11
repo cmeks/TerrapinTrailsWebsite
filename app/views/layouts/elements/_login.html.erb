@@ -1,25 +1,25 @@
 <% if logged_in? %>
-    <div class="well">
+    <div class="well logcursor">
         <h4 class="text-center">Hi, <%= @user.first_name %> <%= @user.last_name %>!</h4>
         <p class="text-center">Welcome back.</p>
         <p class="text-center">
-            <%= link_to "Profile", @user, class: 'small-padding btn btn-md btn-primary' %>
-            <%= link_to "Logout", logout_path, method: "delete", class: 'small-padding btn btn-md btn-success' %> 
+            <%= link_to "Profile", @user, class: 'small-padding btn btn-md woodbtn' %>
+            <%= link_to "Logout", logout_path, method: "delete", class: 'small-padding btn btn-md woodbtn' %> 
         </p>
     </div>
 <% else %>
-    <div class="well">
+    <div class="well logcursor">
         <%= form_for(:session, url: login_path) do |f| %>
-            <%= f.email_field :email, :placeholder => "email", class: 'form-control wide' %>
+            <%= f.email_field :email, :placeholder => "Type your email address here", class: 'form-control wide woodtext' %>
             
-            <%= f.password_field :password, :placeholder => "password", class: 'form-control wide' %>
+            <%= f.password_field :password, :placeholder => "Type your password here", class: 'form-control wide woodtext' %>
 
             <%= f.label :remember_me, class: "checkbox inline wide" do %>
                 <%= f.check_box :remember_me %>
                 <span>Keep me logged in</span>
             <% end %>
 
-            <%= f.submit "Log in", class: "btn btn-primary wide" %>
+            <%= f.submit "Log in", class: "btn wide woodbtn logcursor" %>
             
         <% end %>
 

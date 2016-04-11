@@ -1,45 +1,48 @@
 <% provide(:title, 'Sign up') %>
+<br/>
+<center>
+<div class="row" id="signup">
+<div class="well">
 <h1 class="center header">Sign up</h1>
-
-<div class="row">
-  	<div class="col-md-6 col-md-offset-3">
     	<%= form_for(@user) do |f| %>
 			<%= render 'shared/error_messages', object: f.object %>
 
       		<%= f.label :first_name %>
-      		<%= f.text_field :first_name, class: 'form-control wide' %>
+      		<%= f.text_field :first_name, class: 'form-control wide woodtext' %>
 
           <%= f.label :last_name %>
-          <%= f.text_field :last_name, class: 'form-control wide' %>
+          <%= f.text_field :last_name, class: 'form-control wide woodtext' %>
 
       		<%= f.label :email %>
-      		<%= f.email_field :email, class: 'form-control wide' %>
+      		<%= f.email_field :email, class: 'form-control wide woodtext' %>
 
           <%= f.label :ec_name, "Emergency Contact Name" %>
-          <%= f.text_field :ec_name, class: 'form-control wide' %>
+          <%= f.text_field :ec_name, class: 'form-control wide woodtext' %>
 
           <%= f.label :ec_type, "Emergency Contact Relation" %>
-          <%= f.text_field :ec_type, class: 'form-control wide' %>
+          <%= f.text_field :ec_type, class: 'form-control wide woodtext' %>
 
           <%= f.label :ec_phone1, "Emergency Contact Phone Number" %>
-          <%= f.text_field :ec_phone1, class: 'form-control wide', :placeholder => "(123) 456-7890" %>
+          <%= f.text_field :ec_phone1, class: 'form-control wide woodtext', :placeholder => "(123) 456-7890" %>
 
           <%= f.label :ec_phone2, "Emergency Contact Alternate Phone Number (optional)" %>
-          <%= f.text_field :ec_phone2, class: 'form-control wide', :placeholder => "(123) 456-7890" %>
+          <%= f.text_field :ec_phone2, class: 'form-control wide woodtext', :placeholder => "(123) 456-7890" %>
 
           <%= f.label :ec_email, "Emergency Contact Email" %>
-          <%= f.email_field :ec_email, class: 'form-control wide' %>
+          <%= f.email_field :ec_email, class: 'form-control wide woodtext' %>
 
       		<%= f.label :password %>
-      		<%= f.password_field :password, class: 'form-control wide' %>
+      		<%= f.password_field :password, class: 'form-control wide woodtext' %>
 
       		<%= f.label :password_confirmation, "Password confirmation" %>
-      		<%= f.password_field :password_confirmation, class: 'form-control wide' %>
+      		<%= f.password_field :password_confirmation, class: 'form-control wide woodtext' %>
           
           <div class="buttons">
-        		<%= f.submit "Create my account", class: "btn btn-primary", data: { disable_with: "Please wait..." } %>
-            <%= link_to "Cancel", '/home', {:class=>"btn btn-primary"} %>
+        		<%= f.submit "Create my account", class: "btn woodbtn", data: { disable_with: "Please wait..." } %>
+            <%= link_to "Cancel", '/home', {:class=>"btn woodbtn"} %>
           </div>
     	<% end %>
   	</div>
+
 </div>
+</center>

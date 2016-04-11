@@ -1,4 +1,6 @@
 <% provide(:title, 'All Trips') %>
+<div class="letter">
+<center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
 <div class="header">
   <% if logged_in? && current_user.role > 1 %>
     <%= link_to "Create a new Trip!", 'trips/new', class: 'small-padding btn btn-info pull-right' %>
@@ -172,4 +174,5 @@
             </table>
           </div>
         <% end %>
+        </div>
 </div><!-- tab content -->
