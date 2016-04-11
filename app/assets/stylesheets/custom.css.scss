@@ -1,8 +1,26 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* Change cursor to axe and then use drop shadow for everything */
+html{
+   cursor: url(asset-path("axe.png")), auto;
+   filter:         drop-shadow(5px 10px 5px #000); 
+}
+
+a:hover{
+  cursor: url(asset-path("axe.png")), auto;
+}
+
+/* Simulate cutting effect */
+a:active{
+  cursor: url(asset-path("axe2.png")), auto;
+}
+
+
 body { 
     width:100%;
+    background-image:url(wood2.jpg);
+   
 }
 //all the styles for the main pages, jamisons CSS
 #header {
@@ -10,31 +28,75 @@ body {
 }
 
 #header {
-	background-image: image-url("background.jpg");
+    background-image: image-url("background.jpg");
     background-size: cover;
     background-position: left bottom;
     background-repeat: no-repeat;
     color: #fff;
     text-shadow: 5px 5px 15px #000;
 }
+#header #logo h1 {
+    font-size: 48px;
+}
 
-
-@media (max-width:400px)
+/* Custom Responsive design */
+@media (max-width:300px)
 {
     #header {
-height:350px;
+height:150px;
+}
+
+    #header #logo  img{
+height:60px;
+width: 60px;
+}
+    #header #logo  h1{
+font-size:24px;
+}
+    #header #logo  h2{
+font-size:20px;
+}
+    #meeting  h2{
+font-size:20px;
 }
 }
 
-
-@media (max-width:800px)
+@media (max-width:600px)
 {
     #header {
-height:250px;
+height:200px;
+}
+    #header #logo  img{
+height:80px;
+width: 80px;
+}
+    #header #logo  h1{
+font-size:24px;
+}
+    #header #logo  h2{
+font-size:20px;
+}
+    #meeting  h2{
+font-size:20px;
+}
+}
+@media (max-width:1050px)
+{
+    #header {
+height:150px;
+}
+    #header #logo  h1{
+font-size:32px;
+}
+    #header #logo  h2{
+font-size:20px;
+}
+    #meeting  h2{
+font-size:18px;
 }
 }
 
-@media (min-width:800px)
+@media (min-width:1051px)
 {
     #header {
 height:150px;
@@ -43,6 +105,37 @@ height:150px;
 
 #header h1, #header h2 {
     font-family: Georgia, serif;
+}
+
+#header h1 {
+    animation-name:textshadowanimation;
+    animation-iteration-count:infinite;
+    animation-duration: 1.5s ;       
+    animation-timing-function: ease-in-out; 
+}
+
+#header #logo img{
+filter:	drop-shadow(5px 10px 5px #000); 
+}
+
+@keyframes textshadowanimation {
+  0% {
+    text-shadow:1px 1px #000;        
+  }
+  30% {
+        text-shadow:4px 4px #000; 
+  }
+  60% { 
+        text-shadow:4px 4px #000; 
+  }       
+  100% {
+  text-shadow:1px 1px #000;       
+  }               
+}
+
+#header h1:hover{
+/* text-shadow:1px 1px #000; */
+  
 }
 
 #header h2 {
@@ -57,9 +150,6 @@ height:150px;
     margin: 10px 10px 0 0;
 }
 
-#header #logo h1 {
-    font-size: 48px;
-}
 
 #header #logo h2 {
     margin-top: 0;
@@ -93,12 +183,150 @@ height:150px;
 #navbar .navbar {
     border-radius: 0;
     margin-bottom: 0;
+    background-image: url('wood.png');
+  background-repeat: repeat-x;
+  color:white;
+  width:100%;
 }
 
+#navbar ul li a {
+color:white;
+/* text-shadow: 1px 2px #000000; */
+/* text-shadow: -2px -1px 1px #666, 1px 1px 1px #000; */
+box-shadow: 
+  0 1px 2px #966f33, /*bottom external highlight*/
+  0 -1px 1px #666, /*top external shadow*/ 
+  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
+  inset 0 1px 1px rgba(100,100,100,0.8); /*top internal highlight*/
+transform:rotateX(100);
+}
+
+#navbar ul li a:hover {
+color:white;
+/* text-shadow: 1px 2px #000000; */
+text-shadow: -2px -1px 1px #666, 1px 1px 1px #000;
+box-shadow: 
+  0 1px 2px #966f33, /*bottom external highlight*/
+  0 5px 8px #000, /*top external shadow*/ 
+  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
+  inset 0 1px 1px rgba(100,100,100,0.8); /*top internal highlight*/
+transform:rotateX(100);
+}
+
+#navbar ul li a:active {
+color:white;
+/* text-shadow: 1px 2px #000000; */
+text-shadow: -2px -1px 1px #666, 1px 1px 1px #000;
+box-shadow: 
+  0 1px 2px #966f33, /*bottom external highlight*/
+  0 5px 8px #000, /*top external shadow*/ 
+  inset 0 -1px 1px rgba(0,0,0,0.5), /*bottom internal shadow*/ 
+  inset 0 1px 1px rgba(100,100,100,0.8); /*top internal highlight*/
+transform:skewX(25deg);
+}
+
+.nail {
+  height:30px;
+/*   transform:rotateZ(150deg); */
+  transform:rotateZ(-110deg);
+  transform:rotateY(160deg);
+  margin-bottom:-30px;
+  filter:         drop-shadow(5px 0px 10px #444); 
+  
+}
+
+/*cursors */
+
+.orangehat {
+  cursor: url(asset-path("orangehat.png")), auto;
+}
+
+.eaglescout {
+  cursor: url(asset-path("eaglescout.png")), auto;
+}
+
+.officercursor {
+  cursor: url(asset-path("officer.png")), auto;
+}
+.logcursor {
+  cursor: url(asset-path("log.png")), auto;
+}
+.logcursor a {
+  cursor: url(asset-path("log.png")), auto;
+}
+
+.woodbtn {
+  background-image:url(wood2.jpg);
+  box-shadow: 3px 2px #000;
+  border: 0 0;
+  cursor: url(asset-path("log.png")), auto;
+  color:white;
+}
+
+.woodbtn:hover {
+  background-image:url(wood2.jpg);
+  box-shadow: 4px 1px #000;
+  border: 0 0;
+  color:white;
+  text-shadow:2px 1px #000;
+}
+
+.woodtext{
+ background-color:#20110e;
+/*   background-color:#331a16; */
+
+  box-shadow: 10px 4px #000;
+  border-color: black;
+  color:white;
+  transform: translate3d(0px, 0px, 10px);
+}
+
+
+
+
+.letter {
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  margin: 26px auto 0;
+  max-width: 100%;
+  min-height: 300px;
+  padding: 24px;
+  position: relative;
+  width: 100%;
+}
+.letter:before, .letter:after {
+  content: "";
+  height: 98%;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+.letter:before {
+  background: #fafafa;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  left: -5px;
+  top: 4px;
+  transform: rotate(-2.5deg);
+}
+.letter:after {
+  background: #f6f6f6;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  right: -3px;
+  top: 1px;
+  transform: rotate(1.4deg);
+}
+
+
+.whitebg {
+    background-color:white;
+    box-shadow: 1px 1px #000;
+    padding: 10px 10px;
+    
+}
 #body #headline {
     background-color: #f5f5f5;
     border: 1px solid #e3e3e3;
-    border-bottom-right-radius: 4px;
+/*     border-bottom-right-radius: 4px; */
     margin: 0 -25px 20px -25px;
     padding: 10px 0 20px 25px;
 }
@@ -117,11 +345,15 @@ height:150px;
 
 #body #leftbar, #body #rightbar {
     padding-top: 20px;
+    
 }
 
 #body #leftbar #about {
     font-size: 16px;
     text-align: justify;
+    background-color:white;
+    
+    padding: 10px 10px;
 }
 
 #body #leftbar #about .buttons {
@@ -129,17 +361,23 @@ height:150px;
 }
 
 #body #leftbar #about .buttons a {
-    margin-right: 5px;
+/*     margin-right: 5px; */
 }
 
-#body #leftbar #officers .media {
-    margin-left: 5px;
-    margin-top: 10px;
+#body  #officers {
+/*     margin-left: 5px; */
+    background-color:white;
+   
+    padding: 10px 10px;
+    
+}
+#body  #officers .media {
+/*     margin-left: 5px; */
+    
 }
 
-#body #leftbar #officers .media img {
-    height: 70px;
-    width: 70px;
+#body #officers .media img {
+    width: 100%;
 }
 
 #body #content .tab-pane {
@@ -147,9 +385,9 @@ height:150px;
 }
 
 #body #content .tab-content {
-    border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+/*     border-bottom: 1px solid #ccc; */
+/*     border-left: 1px solid #ccc; */
+    border-right: 1px solid #000;
     padding: 0 20px 0 5px;
 }
 
@@ -279,25 +517,66 @@ height:150px;
     vertical-align: bottom;
 }
 
+/* For the invalid login screen */
+#session .well {
+    padding: 15px;
+    width:50%;
+    background-image:url('wood.png');
+    color:white;
+    border-color:black;
+    box-shadow: 3px 2px #000;
+}
+
+#signup .well {
+    padding: 15px;
+    width:50%;
+    background-image:url('wood.png');
+    color:white;
+    border-color:black;
+    box-shadow: 3px 2px #000;
+}
+
+
 #body #rightbar .well {
     padding: 15px;
+    background-image:url('wood.png');
+    color:white;
+    border-color:black;
+    box-shadow: 3px 2px #000;
 }
+
+
+
 
 #body #rightbar .well form {
     margin: 5px;
     text-align: center;
 }
 
+#body #rightbar .well .woodbtn {
+background-image:url(wood2.jpg);
+box-shadow: 1px 1px #000;
+border: 0 0;
+    cursor: url(asset-path("log.png")), auto;
+  color:white;
+}
+
 #body #rightbar #newsfeed .media {
     padding-left: 10px ;
 }
-
+#body #rightbar #mission {
+    background-color:white;
+ 
+    padding: 10px 10px;
+    
+}
 #body #rightbar #mission p {
     color: #555;
     font-size: 16px;
     font-style: italic;
     font-family: Georgia, serif;
     padding-left: 10px;
+
 }
 
 #footer {
@@ -311,6 +590,9 @@ height:150px;
     padding-bottom: 10px;
     padding-top: 10px;
     margin-bottom: 0;
+    background-image: url('wood.png');
+    background-repeat: repeat-x;
+    color:white;
 }
 
 #footer #quote blockquote {
