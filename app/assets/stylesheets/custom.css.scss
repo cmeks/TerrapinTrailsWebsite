@@ -19,7 +19,7 @@ a:active{
 
 body { 
     width:100%;
-    background-image:url(wood2.jpg);
+    background-image:url(image_path("wood2.jpg"));
    
 }
 //all the styles for the main pages, jamisons CSS
@@ -183,7 +183,7 @@ filter:	drop-shadow(5px 10px 5px #000);
 #navbar .navbar {
     border-radius: 0;
     margin-bottom: 0;
-    background-image: url('wood.png');
+    background-image: url(image_path('wood.png'));
   background-repeat: repeat-x;
   color:white;
   width:100%;
@@ -256,7 +256,7 @@ transform:skewX(25deg);
 }
 
 .woodbtn {
-  background-image:url(wood2.jpg);
+  background-image:url(image_path("wood2.jpg"));
   box-shadow: 3px 2px #000;
   border: 0 0;
   cursor: url(asset-path("log.png")), auto;
@@ -264,7 +264,7 @@ transform:skewX(25deg);
 }
 
 .woodbtn:hover {
-  background-image:url(wood2.jpg);
+  background-image:url(image_path("wood2.jpg"));
   box-shadow: 4px 1px #000;
   border: 0 0;
   color:white;
@@ -521,7 +521,7 @@ transform:skewX(25deg);
 #session .well {
     padding: 15px;
     width:50%;
-    background-image:url('wood.png');
+    background-image:url(image_path("wood.png"));
     color:white;
     border-color:black;
     box-shadow: 3px 2px #000;
@@ -530,7 +530,7 @@ transform:skewX(25deg);
 #signup .well {
     padding: 15px;
     width:50%;
-    background-image:url('wood.png');
+    background-image:url(image_path("wood.png"));
     color:white;
     border-color:black;
     box-shadow: 3px 2px #000;
@@ -590,7 +590,7 @@ border: 0 0;
     padding-bottom: 10px;
     padding-top: 10px;
     margin-bottom: 0;
-    background-image: url('wood.png');
+    background-image: url(image_path("wood.png"));
     background-repeat: repeat-x;
     color:white;
 }
