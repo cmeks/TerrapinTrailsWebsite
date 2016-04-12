@@ -539,7 +539,7 @@ transform:skewX(25deg);
 
 #body #rightbar .well {
     padding: 15px;
-    background-image:url('wood.png');
+    background-image:url((image_path('wood.png'));
     color:white;
     border-color:black;
     box-shadow: 3px 2px #000;
@@ -554,7 +554,7 @@ transform:skewX(25deg);
 }
 
 #body #rightbar .well .woodbtn {
-background-image:url(wood2.jpg);
+background-image:url(image_path("wood2.jpg"));
 box-shadow: 1px 1px #000;
 border: 0 0;
     cursor: url(asset-path("log.png")), auto;
