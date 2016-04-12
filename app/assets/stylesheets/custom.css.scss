@@ -1,21 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* Change cursor to axe and then use drop shadow for everything */
+/* Use drop shadow for everything */
 html{
-   cursor: url(asset-path("axe.png")), auto;
-   filter:         drop-shadow(5px 10px 5px #000); 
+   filter:drop-shadow(5px 10px 5px #000); 
 }
-
-a:hover{
-  cursor: url(asset-path("axe.png")), auto;
-}
-
-/* Simulate cutting effect */
-a:active{
-  cursor: url(asset-path("axe2.png")), auto;
-}
-
 
 body { 
     width:100%;
@@ -235,31 +224,11 @@ transform:skewX(25deg);
   
 }
 
-/*cursors */
-
-.orangehat {
-  cursor: url(asset-path("orangehat.png")), auto;
-}
-
-.eaglescout {
-  cursor: url(asset-path("eaglescout.png")), auto;
-}
-
-.officercursor {
-  cursor: url(asset-path("officer.png")), auto;
-}
-.logcursor {
-  cursor: url(asset-path("log.png")), auto;
-}
-.logcursor a {
-  cursor: url(asset-path("log.png")), auto;
-}
 
 .woodbtn {
   background-image:url(image_path("wood2.jpg"));
   box-shadow: 3px 2px #000;
   border: 0 0;
-  cursor: url(asset-path("log.png")), auto;
   color:white;
 }
 
@@ -557,8 +526,7 @@ transform:skewX(25deg);
 background-image:url(image_path("wood2.jpg"));
 box-shadow: 1px 1px #000;
 border: 0 0;
-    cursor: url(asset-path("log.png")), auto;
-  color:white;
+color:white;
 }
 
 #body #rightbar #newsfeed .media {
