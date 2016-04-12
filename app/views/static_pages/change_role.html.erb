@@ -1,3 +1,5 @@
+<div class="letter">
+<center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
 <div class="header center">
 	<h1> Change a user's role </h1>
 </div>
@@ -11,5 +13,6 @@
 	</div>
 	<div class="center">
     	<%= submit_tag 'Change this users role', class: 'btn btn-warning btn-md center', data: { disable_with: "Please wait..." } %>
+    </div>
     </div>
 <% end %>

@@ -1,0 +1,17 @@
+<div class="letter">
+<center> <%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
+<h1>Albums</h1>
+<div id="nanoGallery1"></div>
+</div>
+<script>
+
+  $(document).ready(function () {
+      $("#nanoGallery1").nanoGallery({
+          kind: 'flickr',
+          userID: '140975424@N03',
+          thumbnailWidth: 300,
+          thumbnailHeight: 300,
+      });
+  });
+      
+</script>

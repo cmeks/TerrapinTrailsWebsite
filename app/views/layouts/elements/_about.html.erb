@@ -7,14 +7,15 @@
     staff, and alumnus regardless of age or skill level. We have all the gear 
     you need to help make your awesome outdoors adventure a reality.
 </p>
-
+<center>
 <div class="buttons">
 	<% if !logged_in? %>
-		<%= link_to "Join Us", signup_path, class: "btn btn-primary" %>
+		<%= link_to "Join Us", signup_path, class: "btn  woodbtn" %>
 	<% end %>
 	<% if logged_in? %>
-		<%= link_to "Learn More", '/about', class: "btn btn-success wide" %>
+		<%= link_to "Learn More", '/about', class: "btn  wide woodbtn" %>
 	<% else %>
-		<%= link_to "Learn More", '/about', class: "btn btn-success" %>
+		<%= link_to "Learn More", '/about', class: "btn  woodbtn" %>
 	<% end %>
 </div>
+</center>

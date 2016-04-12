@@ -1,4 +1,7 @@
+<div class="letter">
+<center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
 <div class="header">
+
 	<%= link_to 'Edit a users role', '/change_role', class: 'small-padding btn btn-success pull-right' %>
 	<h1>All Members</h1>
 </div>
@@ -7,4 +10,5 @@
 	<% @users.each do |user| %>
 		<h2> <%= link_to user.first_name + " " + user.last_name, user %> </h2>
 	<% end %>
+</div>
 </div>

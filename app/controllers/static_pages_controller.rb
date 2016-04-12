@@ -26,6 +26,12 @@ class StaticPagesController < ApplicationController
 
 	def officers
 	end
+	
+	def calendar
+	end
+	
+	def albums
+	end
 
 	private
 
