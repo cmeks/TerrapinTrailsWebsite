@@ -1,12 +1,4 @@
-<script>
-	$(document).ready(function(){
-	     $(".start-slide").click(function(){
-	        $("#myCarousel").carousel('cycle');
-	    });
-	});
-</script>
-
- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 letter">
+ <div class="letter">
     <center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
         <h3>Upcoming Trips</h3>
         <% if @current.count > 0 %>
@@ -54,4 +46,4 @@
 	      	<h3> - There are none </h3>
 	      <% end %>
     </div>
-</div>
+    <br/>
