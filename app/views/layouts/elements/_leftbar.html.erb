@@ -1,55 +1,5 @@
 <div class="container-fluid">
 <div class="row">
 
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 letter">
-    <center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center>
-        <h3>Upcoming Trips</h3>
-        <% if @current.count > 0 %>
-	        <table class="table table-hover">
-	            	<thead>
-	    				<tr>
-	        				<th>Trip Name</th>
-	        				<th>Trip Leader</th>
-	        				<th>Start Date</th>
-	        				<th>End Date</th>
-	    				</tr>
-	   				 </thead>
-	   				 <tbody>
-	   				 	<% @current.each do |trip| %>
-	              <% if trip.status == 2 %>
-	     				 		<tr>
-	  	    					<th> <%= link_to trip.name, trip %> </th>
-	  	    					<th> <%= trip.user.name %> </th>
-	  	    					<th> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
-	  	    					<th> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
-	      					</tr>
-	              <% else %>
-	                <% if trip.status == 0 && logged_in? && (trip.user == current_user || current_user.role >= 3)  %>
-	                  <tr>
-	                    <td class="text-muted"> <%= link_to trip.name, trip , class: "text-muted" %> </td>
-	                    <td class="text-muted"> <%= trip.user.name %> </td>
-	                    <td class="text-muted"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </td>
-	                    <td class="text-muted"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </td>
-	                  </tr>
-	                <% else %>
-	                  <% if trip.status == 1 %>
-	                    <tr>
-	                      <th class="red"> <%= link_to trip.name, trip, class: "red" %> </th>
-	                      <th class="red"> <%= trip.user.name %> </th>
-	                      <th class="red"> <%= trip.start_date.strftime("%b %d %I:%M %p") %> </th>
-	                      <th class="red"> <%= trip.end_date.strftime("%b %d %I:%M %p") %> </th>
-	                    </tr>
-	                  <% end %>
-	                <% end %>
-	              <% end %>
-	  					<% end %>
-	  				</tbody>
-	            </table>
-	      <% else %>
-	      	<h3> - There are none </h3>
-	      <% end %>
-    </div>
-</div>
-
-    
+        <div id="about" class="letter"><center><%= image_tag('nail.png', alt: 'nail', class:'nail', ) %></center><%= render 'layouts/elements/about' %></div>
 </div>
